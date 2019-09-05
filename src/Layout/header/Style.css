@@ -1,0 +1,9 @@
+.show-me-sm { display: none !important; }
+.page-title { float: left; }
+
+@media screen and (max-width: 600px) {
+  .remove-me-sm { display: none !important; }
+  .show-me-sm { display: block !important; }
+  .page-title { float: none;}
+  .fix-icon-center { margin-left: -13px !important; }
+}
