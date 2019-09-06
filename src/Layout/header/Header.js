@@ -3,19 +3,25 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
+import MenuItem from '@material-ui/core/MenuItem'
 
-import { Link as LinkTwo } from 'react-router-dom';
+// import Link from '@material-ui/core/Link';
+// import Paper from '@material-ui/core/Paper';
+// import Grid from '@material-ui/core/Grid';
+
+import { NavLink as LinkTwo } from 'react-router-dom';
 import NavConfig from '../navbar/NavConfig';
+
+import HeaderImage from '../../assets/HeaderImage.jpeg';
 
 import Navbar from '../navbar/Navbar';
 import './Style.css';
 
 const useStyles = makeStyles(theme => ({
   topBtns: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
+    fontSize: '16px',
+    padding: theme.spacing(1)
   },
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
@@ -32,10 +38,10 @@ const useStyles = makeStyles(theme => ({
   },
   mainFeaturedPost: {
     position: 'relative',
-    backgroundColor: theme.palette.grey[800],
+    backgroundColor: 'rgba(41, 44, 42, 0.7)', //theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: 'url(https://source.unsplash.com/user/erondu)',
+    backgroundImage: `url(${HeaderImage})`, // https://source.unsplash.com/user/erondu
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -46,11 +52,12 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(6),
       paddingRight: 0,
-    },
+    }
   },
   link: {
     color: 'black',
     textDecoration: 'none',
+    fontSize: '16px',
   }
 }));
 
@@ -60,11 +67,11 @@ const Header = () => {
   const classes = useStyles();
 
   const CreateLink = (item) => (
-    <Link noWrap key={item.name} className={classes.link} color="inherit">
-      <LinkTwo className={classes.link} to={item.url} style={ { margin: '10px' } }>
-        { item.name }
-      </LinkTwo>
-    </Link>
+    <LinkTwo key={item.name}  exact activeClassName="active" className={classes.link} to={item.url} style={ { margin: '10px' } }>
+      <MenuItem color="inherit">
+          { item.name }
+      </MenuItem>
+    </LinkTwo>
   );
 
   return (
@@ -79,15 +86,21 @@ const Header = () => {
           noWrap
           className={`${classes.toolbarTitle} fix-icon-center`}
         >
-          <span className="page-title">Webb Trade Center</span>
+        <span className="page-title">
+          Webb Trade Center
+        </span>
         </Typography>
           <div className="remove-me-sm">
-            <Button variant="outlined" size="small" className={classes.topBtns}>
-              { CreateLink(NavConfig.buttons.Login) }
-            </Button>
-            <Button variant="outlined" size="small" className={classes.topBtns}>
-              { CreateLink(NavConfig.buttons.Sign) }
-            </Button>
+            <LinkTwo exact activeClassName="activeS" className={classes.link} to={NavConfig.buttons.Login.url}>
+              <Button variant="outlined" size="small" className={`${classes.topBtns} no-pointer`}>
+                <span>{NavConfig.buttons.Login.name}</span>
+              </Button>
+            </LinkTwo>
+            <LinkTwo exact activeClassName="activeS" className={classes.link} to={NavConfig.buttons.Sign.url}>
+              <Button variant="outlined" size="small" className={`${classes.topBtns} no-pointer`}>
+                <span>{NavConfig.buttons.Sign.name}</span>
+              </Button>
+            </LinkTwo>
           </div>
         </Toolbar>
 
@@ -98,34 +111,31 @@ const Header = () => {
           ))}
         </Toolbar>
       </div>
-
-      <Paper className={classes.mainFeaturedPost}>
-        {
-          <img
-            style={{ display: 'none' }}
-            src="https://source.unsplash.com/user/erondu"
-            alt="background"
-          />
-        }
-        <div className={classes.overlay} />
-        <Grid container>
-          <Grid item md={6}>
-            <div className={classes.mainFeaturedPostContent}>
-              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                Skall man göra en title till? ..
-              </Typography>
-              <Typography variant="h5" color="inherit" paragraph>
-                kan man lägga till lite mer text som en paragraf kanske?..
-              </Typography>
-              <Link variant="subtitle1" href="#">
-                Länka till något? ..
-              </Link>
-            </div>
-          </Grid>
-        </Grid>
-      </Paper>
     </>
   );
 };
 
 export default Header;
+
+/* <Paper className={classes.mainFeaturedPost}>
+  {
+    <img
+      style={{ display: 'none' }}
+      src="https://source.unsplash.com/user/erondu"
+      alt="background"
+    />
+  }
+  <div className={classes.overlay} />
+  <Grid container>
+    <Grid item md={6}>
+      <div className={classes.mainFeaturedPostContent}>
+        <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+          Skall man göra en title till? ..
+        </Typography>
+        <Typography variant="h5" color="inherit" paragraph>
+          kan man lägga till lite mer text som en paragraf kanske?..
+        </Typography>
+      </div>
+    </Grid>
+  </Grid>
+</Paper> */

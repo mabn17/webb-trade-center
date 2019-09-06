@@ -30,7 +30,8 @@ const featuredItems = [
 
 const useStyles = makeStyles(theme => ({
   mainGrid: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(5),
+    padding: theme.spacing(2),
   },
   card: {
     display: 'flex',
@@ -40,10 +41,6 @@ const useStyles = makeStyles(theme => ({
   },
   cardMedia: {
     width: 160,
-  },
-  markdown: {
-    ...theme.typography.body2,
-    padding: theme.spacing(3, 0),
   }
 }));
 
