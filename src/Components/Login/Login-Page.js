@@ -1,7 +1,6 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -42,9 +41,10 @@ const useStyles = makeStyles(theme => ({
 
 const LoginPage = () => {
   const classes = useStyles();
+  const [errMessage, setErrMessage] = React.useState(null);
   const [inputValues, setInputValues] = React.useState({
-    password: null,
-    email: null
+    password: '',
+    email: ''
   });
 
   const handleChange = (event) => {
@@ -52,25 +52,49 @@ const LoginPage = () => {
     setInputValues(inputValues => ({ ...inputValues, [event.target.name]: event.target.value }));
   }
 
-  const validateEmail = () => {
+  const validateEmail = (value = inputValues.email) => {
+    const email = value;
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(inputValues.email).toLowerCase());
+
+    return re.test(String(email).toLowerCase());
+  }
+
+  const validatePassword = (size = 4, value = inputValues.password) => {
+    const len = value.length;
+    if (len < size) return false;
+    return true;
+  }
+
+  const validateAll = () => {
+    if (!validateEmail()) {
+      setErrMessage('Invalid email address.');
+      return false;
+    }
+    if (!validatePassword()) {
+      setErrMessage('Password has to be atleast 4 characters long.');
+      return false;
+    }
+    setErrMessage(null);
+    return true;
   }
 
   const doLogin = (e) => {
     e.preventDefault();
-    console.log(validateEmail());
-    console.log(inputValues);
+
+    if (!validateAll()) return;
+    console.log(process.env.REACT_APP_BACKEND_URL);
   }
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      <Typography component="h1" variant="h5">
+        { errMessage }
+      </Typography>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h2" variant="h5">
           Sign in
         </Typography>
         <form className={classes.form} >

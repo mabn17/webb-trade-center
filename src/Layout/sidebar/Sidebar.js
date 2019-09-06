@@ -67,3 +67,26 @@ const Sidebar = () => {
 };
   
 export default Sidebar;
+
+/* <Paper className={classes.mainFeaturedPost}>
+  {
+    <img
+      style={{ display: 'none' }}
+      src="https://source.unsplash.com/user/erondu"
+      alt="background"
+    />
+  }
+  <div className={classes.overlay} />
+  <Grid container>
+    <Grid item md={6}>
+      <div className={classes.mainFeaturedPostContent}>
+        <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+          Skall man göra en title till? ..
+        </Typography>
+        <Typography variant="h5" color="inherit" paragraph>
+          kan man lägga till lite mer text som en paragraf kanske?..
+        </Typography>
+      </div>
+    </Grid>
+  </Grid>
+</Paper> */

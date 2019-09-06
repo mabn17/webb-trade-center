@@ -11,7 +11,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import LoginIcon from '@material-ui/icons/Wifi';
 import SignIcon from '@material-ui/icons/LocalPostOffice';
 import LogoutIcon from '@material-ui/icons/WifiOff';
-
+import { withRouter } from 'react-router';
+import { getToken, removeToken } from '../../Helpers/Methods/TokenHandeler';
 import NavConfig from './NavConfig';
 
 const useStyles = makeStyles({
@@ -39,17 +40,26 @@ const useStyles = makeStyles({
   },
 });
 
-const ResponsiveNav = () => {
+const Icons = [ LoginIcon, SignIcon ];
+
+const ResponsiveNav = (props) => {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false
   });
 
+  const logout = () => {
+    removeToken();
+    props.update();
+
+    props.history.push('/login');
+  };
+
   const toggleDrawer = (side, open) => event => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
+    console.log(props.token);
     setState({ ...state, [side]: open });
   };
 
@@ -71,15 +81,21 @@ const ResponsiveNav = () => {
       id="nav-res"
     >
       <List className={classes.topLinks}>
-        { CreateLink(NavConfig.buttons.Login, LoginIcon) }
-        { CreateLink(NavConfig.buttons.Sign, SignIcon) }
-        { CreateLink(NavConfig.buttons.Logout, LogoutIcon) }
+        { props.token
+          ? (<div onClick={logout}>{CreateLink(NavConfig.buttons.Logout, LogoutIcon)}</div>)
+          : [NavConfig.buttons.Login, NavConfig.buttons.Sign].map((btn, index) => (
+            CreateLink(btn, Icons[index])
+          ))
+        }
       </List>
       <Divider />
       <List className={classes.bottom}>
         {NavConfig.defaults.map((url) => (
           CreateLink(url)
         ))}
+        {
+          !props.token ? null : NavConfig.loggedIn.map((memberUrl) => CreateLink(memberUrl))
+        }
       </List>
     </div>
   );
@@ -106,5 +122,5 @@ const ResponsiveNav = () => {
   );
 }
 
-export default ResponsiveNav;
+export default withRouter(ResponsiveNav);
 
