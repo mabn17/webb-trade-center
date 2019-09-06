@@ -100,7 +100,7 @@ const LoginPage = (props) => {
     if (!validateAll()) return;
     registerUser(inputValues).then((registerd) => {
       if (hasError(registerd)) {
-        setErrMessage(registerUser);
+        setErrMessage(registerd);
       } else {
         signInUser(inputValues).then((loggedIn) => {
           if (hasError(loggedIn)) {

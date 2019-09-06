@@ -9,6 +9,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './Layout/header/Header';
 import Footer from './Layout/footer/Footer';
 import HomePage from './Components/Home/Index-Page';
+import AboutPage from './Components/About/About-Page';
+import MyAccountPage from './Components/Account/My-Account-Page';
 import LoginPage from './Components/Login/Login-Page';
 import RegisterPage from './Components/Register/Register-Page';
 import FoFPage from './Components/FoF/FoF-Page';
@@ -36,6 +38,8 @@ const App = () => {
             <Grid container spacing={4}>
               <Switch>
                 <Route exact path="/" component={HomePage} />
+                <Route exact path="/about" component={AboutPage} />
+                <Route exact path="/account" render={(props) => <MyAccountPage {...props} updateAll={refresh} />} />
                 <Route path="/login" render={(props) => <LoginPage {...props} updateAll={refresh} />} />
                 <Route path="/register" render={(props) => <RegisterPage {...props} updateAll={refresh} />} />
                 <Route exact path="**" component={FoFPage} />

@@ -39,6 +39,12 @@ const useStyles = makeStyles(theme => ({
   link: {
     color: '#3f51b5',
     textDecoration: 'none',
+  },
+  error: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'red',
   }
 }));
 
@@ -100,9 +106,6 @@ const LoginPage = (props) => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Typography component="h1" variant="h5">
-        { errMessage }
-      </Typography>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -135,6 +138,11 @@ const LoginPage = (props) => {
             onChange={handleChange}
             autoComplete="current-password"
           />
+          { errMessage ? (
+            <Typography component="h1" variant="h5" className={classes.error}>
+              { errMessage }
+            </Typography>
+          ) : null}
           <Button
             type="submit"
             fullWidth

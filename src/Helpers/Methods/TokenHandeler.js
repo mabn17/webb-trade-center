@@ -14,6 +14,8 @@ export const hasError = (value) => {
 export const hasAuth = (token, props) => {
   if (token.exp < (new Date() / 1000)) {
     removeToken();
+    props.updateAll();
+    console.log('hmm');
     props.history.push('/login');
   }
 };

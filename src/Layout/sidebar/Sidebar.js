@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const social = ['GitHub', 'Twitter', 'Facebook'];
 const archives = [
-  'March 2020',
+  'My Items',
   'February 2020',
   'January 2020',
   'December 2019',
@@ -39,15 +39,14 @@ const Sidebar = () => {
     <Grid item xs={12} md={4}>
       <Paper elevation={0} className={classes.sidebarAboutBox}>
         <Typography variant="h6" gutterBottom>
-          About
+          Namn
         </Typography>
         <Typography>
-          Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit
-          amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
+          Balance: 20 kr.
         </Typography>
       </Paper>
       <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
-        Archives
+        Navigation
       </Typography>
       {archives.map(archive => (
         <Link display="block" variant="body1" href="#" key={archive}>
