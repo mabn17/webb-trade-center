@@ -1,1 +1,0 @@
-Selling items has never been easier

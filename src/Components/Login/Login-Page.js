@@ -7,8 +7,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import { signInUser } from '../../Helpers/Requests/sign/sign';
+import { setToken, hasError } from '../../Helpers/Methods/TokenHandeler';
+
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -39,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LoginPage = () => {
+const LoginPage = (props) => {
   const classes = useStyles();
   const [errMessage, setErrMessage] = React.useState(null);
   const [inputValues, setInputValues] = React.useState({
@@ -82,7 +85,17 @@ const LoginPage = () => {
     e.preventDefault();
 
     if (!validateAll()) return;
-    console.log(process.env.REACT_APP_BACKEND_URL);
+    signInUser(inputValues)
+      .then((res) => {
+        if (hasError(res)) {
+          setErrMessage(res)
+        } else {
+          setToken(res.token);
+          setInputValues({ email: null, password: null });
+          props.updateAll();
+          props.history.push('/account');
+        }
+      })
   }
 
   return (

@@ -10,7 +10,8 @@ import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
-// import { signInUser } from '../../Helpers/Requests/sign/sign';
+import { registerUser, signInUser } from '../../Helpers/Requests/sign/sign';
+import { setToken, hasError } from '../../Helpers/Methods/TokenHandeler';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -47,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LoginPage = () => {
+const LoginPage = (props) => {
   const classes = useStyles();
   const [errMessage, setErrMessage] = React.useState(null);
   const [inputValues, setInputValues] = React.useState({
@@ -97,11 +98,22 @@ const LoginPage = () => {
     e.preventDefault();
 
     if (!validateAll()) return;
-    
-    // signInUser(inputValues).then((res) => {
-    //   console.log(res);
-    //   console.log('');
-    // }).catch(err => console.log(err.response));
+    registerUser(inputValues).then((registerd) => {
+      if (hasError(registerd)) {
+        setErrMessage(registerUser);
+      } else {
+        signInUser(inputValues).then((loggedIn) => {
+          if (hasError(loggedIn)) {
+            setErrMessage(loggedIn);
+          } else {
+            setToken(loggedIn.token);
+
+            props.updateAll();
+            props.history.push('/account');
+          }
+        })
+      }
+    });
   }
 
   return (

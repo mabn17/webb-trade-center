@@ -12,7 +12,7 @@ import LoginIcon from '@material-ui/icons/Wifi';
 import SignIcon from '@material-ui/icons/LocalPostOffice';
 import LogoutIcon from '@material-ui/icons/WifiOff';
 import { withRouter } from 'react-router';
-import { getToken, removeToken } from '../../Helpers/Methods/TokenHandeler';
+import { removeToken } from '../../Helpers/Methods/TokenHandeler';
 import NavConfig from './NavConfig';
 
 const useStyles = makeStyles({
@@ -59,7 +59,7 @@ const ResponsiveNav = (props) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    console.log(props.token);
+
     setState({ ...state, [side]: open });
   };
 

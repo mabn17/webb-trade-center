@@ -52,7 +52,7 @@ const Header = (props) => {
 
   React.useEffect(() => {
     setToken(getToken());
-  }, [update]);
+  }, [update, props.updateAll]);
 
   const handleToken = () => {
     setUpdate(!update);

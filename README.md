@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A frontend for JsRamverk project at BTH.
 
-##### Thanks
-This website was made with material-ui, material-icons and react-to-jsx
+###### Thanks
+This website was made with material-ui and material-icons

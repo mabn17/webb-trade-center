@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { objToLowerCase } from '../../Helpers/Methods/FilterValues';
+import { objToLowerCase } from '../../Methods/FilterValues';
 
 const DETAULT_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
 const register = `${DETAULT_URL}/register`;
