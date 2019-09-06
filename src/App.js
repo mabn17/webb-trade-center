@@ -5,10 +5,13 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import Header from './Layout/header/Header';
-import Footer from './Layout/footer/Footer';
 import HomePage from './Components/Home/Index-Page';
+import LoginPage from './Components/Login/Login-Page';
+import RegisterPage from './Components/Register/Register-Page';
 import FoFPage from './Components/FoF/FoF-Page';
+import Footer from './Layout/footer/Footer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,6 +33,8 @@ const App = () => {
             <Grid container spacing={4}>
               <Switch>
                 <Route exact path="/" component={HomePage} />
+                <Route exact path="/login" component={LoginPage} />
+                <Route exact path="/register" component={RegisterPage} />                
                 <Route exact path="**" component={FoFPage} />
               </Switch>
             </Grid>

@@ -24,11 +24,19 @@ const useStyles = makeStyles({
   link: {
     color: 'black',
     textDecoration: 'none',
-    margin: '15px',
   },
   topLinks: {
     marginTop: '20px',
-  }
+  },
+  middle: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight: '84px',
+  },
+  bottom: {
+    marginTop: '15px',
+  },
 });
 
 const ResponsiveNav = () => {
@@ -47,7 +55,7 @@ const ResponsiveNav = () => {
 
   const CreateLink = (item, IconComponent = null) => (
     <LinkTwo key={item.name} exact activeClassName="activeR" className={classes.link} to={item.url}>
-      <ListItem>
+      <ListItem className={ !IconComponent ? classes.middle : '' }>
         { IconComponent ? (<ListItemIcon><IconComponent /></ListItemIcon>) : null }
         { item.name }
       </ListItem>
@@ -68,7 +76,7 @@ const ResponsiveNav = () => {
         { CreateLink(NavConfig.buttons.Logout, LogoutIcon) }
       </List>
       <Divider />
-      <List>
+      <List className={classes.bottom}>
         {NavConfig.defaults.map((url) => (
           CreateLink(url)
         ))}

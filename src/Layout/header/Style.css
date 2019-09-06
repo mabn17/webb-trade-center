@@ -9,6 +9,7 @@ a {
 .no-pointer::hover { cursor: none; }
 .active { border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
 .activeS > button { background: rgba(0, 0, 0, 0.12); }
+.activeR > li { background: rgba(0, 0, 0, 0.12); }
 
 @media screen and (max-width: 600px) {
   .remove-me-sm { display: none !important; }
