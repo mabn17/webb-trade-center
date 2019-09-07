@@ -1,9 +1,9 @@
-import * as JWT from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 
 export const getToken = () => localStorage.getItem('userToken');
 export const removeToken = () => localStorage.removeItem('userToken');
 export const setToken = (value) => localStorage.setItem('userToken', value);
-export const decodeToken = (token) => JWT(token) || null;
+export const decodeToken = (token) => jwt_decode(token) || null;
 
 export const hasError = (value) => {
   if (typeof value === typeof ' ') return true;
@@ -12,10 +12,10 @@ export const hasError = (value) => {
 };
 
 export const hasAuth = (token, props) => {
+  if (!token) token = { exp: 1 };
   if (token.exp < (new Date() / 1000)) {
     removeToken();
     props.updateAll();
-    console.log('hmm');
     props.history.push('/login');
   }
 };

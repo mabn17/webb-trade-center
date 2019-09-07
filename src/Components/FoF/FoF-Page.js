@@ -16,11 +16,12 @@ const useStyles = makeStyles(theme => ({
 
 const FoFPage = (props) => {
   const classes = useStyles();
+  const path = props.location ? `"${props.location.pathname}"` : 'Page';
 
   return (<>
     <Grid item xs={12} md={12} className={classes.root}>
       <Typography variant="h4" className={classes.root} gutterBottom>
-        404 - "{props.location.pathname}" not found
+        404 - {path} not found
       </Typography>
       <Divider />
     </Grid>
