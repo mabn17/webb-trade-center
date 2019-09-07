@@ -15,8 +15,14 @@ A frontend for [JsRamverk](https://jsramverk.me) project at BTH.
 3. Start the app `npm start`
 
 ## Testing
-1. To see reports from the unittests `npm test`
-2. Tests with Selenium `npm run test:ci`
+1. To see reports from the unittests `npm run test:ci`
+2. Tests with Selenium `npm test`
+
+**OBS** selenium requires your to have [Geckodriver](https://github.com/mozilla/geckodriver/releases) installed in your path.
+
+### Selenium use-cases
+..
+
 
 ## Routes
 ***/*** - Home.  

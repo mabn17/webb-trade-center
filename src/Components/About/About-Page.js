@@ -5,6 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Markdown from '../../Helpers/Markdown/markdown';
+import Jumbo from '../../Layout/jumbotron/jumbotron';
 
 const useStyles = makeStyles(theme => ({
   markdown: {
@@ -25,6 +26,7 @@ const AboutPage = () => {
 
   return (
     <>
+      <Jumbo image={'https://www.knar.com/wp-content/uploads/2015/08/rolex-header-banner-1400x600.jpg'} title={'Test'} text={'some breadcrumbs'} />
       <Grid item xs={12} md={8}>
       <Typography variant="h6" gutterBottom>
         Webb Trade Center

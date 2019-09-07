@@ -1,7 +1,7 @@
 We here at **Webb Trade Center** specialises on trading and buying items.
 
 ## About Us
-Webb Trade Center (*WTC*) started in 2009 somewere in Sweden by Sven Svensson and was then mainly a regional gadget market for Skåne. After a few years, We expanded and offered to buy and sell ads across the country. Today, WTC is a marketplace where you can find just about everything you need - everything from design furniture and strollers to stolen cars.
+Webb Trade Center (*WTC*) started in 2009 somewere in Sweden by Sven Svensson and was then mainly a regional gadget market for Skåne. After a few years, We expanded and offered to buy and sell ads across the country. Today, WTC is a marketplace where you can find just about everything you need when it comes to watches, everything from fake *Rolexes* to stolen *Vacheron Constantin*.
 
 ## Facts
   * We have 5 visitors per week.

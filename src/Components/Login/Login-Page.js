@@ -139,6 +139,7 @@ const LoginPage = (props) => {
             color="primary"
             className={classes.submit}
             onClick={doLogin}
+            name="login"
           >
             Sign In
           </Button>

@@ -94,19 +94,19 @@ const Header = (props) => {
               (
                 <>
                   <LinkTwo exact activeClassName="activeS" className={classes.link} to={NavConfig.buttons.Login.url}>
-                    <Button variant="outlined" size="small" className={`${classes.topBtns} no-pointer`}>
+                    <Button id="login" variant="outlined" size="small" className={`${classes.topBtns} no-pointer`}>
                       <span>{NavConfig.buttons.Login.name}</span>
                     </Button>
                   </LinkTwo>
                   <LinkTwo exact activeClassName="activeS" className={classes.link} to={NavConfig.buttons.Sign.url}>
-                    <Button variant="outlined" size="small" className={`${classes.topBtns} no-pointer`}>
+                    <Button id="register" variant="outlined" size="small" className={`${classes.topBtns} no-pointer`}>
                       <span>{NavConfig.buttons.Sign.name}</span>
                     </Button>
                   </LinkTwo>
                 </>
               ) :
               (
-                <Button variant="outlined" size="small" className={`${classes.topBtns} no-pointer`} onClick={logout}>
+                <Button id="logout" variant="outlined" size="small" className={`${classes.topBtns} no-pointer`} onClick={logout}>
                   <span>{NavConfig.buttons.Logout.name}</span>
                 </Button>
               )

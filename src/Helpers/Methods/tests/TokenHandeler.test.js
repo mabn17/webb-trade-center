@@ -2,7 +2,7 @@ import {
   getToken, removeToken, setToken, hasError, hasAuth, decodeToken
 } from '../TokenHandeler';
 
-/* global it expect */
+/* global it expect localStorage */
 
 it('Testing Accsess method', () => {
   localStorage.removeItem('userToken');
