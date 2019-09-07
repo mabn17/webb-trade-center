@@ -2,9 +2,9 @@
 A frontend for [JsRamverk](https://jsramverk.me) project at BTH.
 
 # Badges
-[![Build Status](https://travis-ci.org/mabn17/ramverk2-server.svg?branch=master)](https://travis-ci.org/mabn17/ramverk2-server)
+[![Build Status](https://travis-ci.org/mabn17/webb-trade-center.svg?branch=master)](https://travis-ci.org/mabn17/webb-trade-center)
 
-[![Build Status](https://scrutinizer-ci.com/g/mabn17/ramverk2-server/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mabn17/ramverk2-server/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mabn17/ramverk2-server/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mabn17/ramverk2-server/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/mabn17/ramverk2-server/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mabn17/ramverk2-server/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/mabn17/webb-trade-center/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mabn17/webb-trade-center/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mabn17/webb-trade-center/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mabn17/webb-trade-center/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/mabn17/webb-trade-center/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mabn17/webb-trade-center/?branch=master)
 
 ## Requirements
 [Server](https://github.com/mabn17/server-webb-trade-center)

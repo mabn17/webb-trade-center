@@ -12,6 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { registerUser, signInUser } from '../../Helpers/Requests/sign/sign';
 import { setToken, hasError } from '../../Helpers/Methods/TokenHandeler';
+import { compareAndValidate } from '../../Helpers/Validators/password';
+import { validateEmail } from '../../Helpers/Validators/email';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -62,35 +64,17 @@ const LoginPage = (props) => {
     setInputValues(inputValues => ({ ...inputValues, [event.target.name]: event.target.value }));
   }
 
-  const validateEmail = (value = inputValues.email) => {
-    const email = value;
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    return re.test(String(email).toLowerCase());
-  }
-
-  const validatePassword = (
-      size = 4, value = inputValues.password,
-      valueTwo = inputValues.passwordTwo
-    ) => {
-    const len = value.length;
-
-    if (len < size) return [false, 'Password has to be atleast 4 characters long.'];
-    if (value !== valueTwo) return [false, 'Passwords does not match.'];
-    return [true, ''];
-  }
-
   const validateAll = () => {
-    if (!validateEmail()) {
+    let validatePass = compareAndValidate(inputValues.password, inputValues.passwordTwo, 4);
+    if (!validatePass[0]) {
+      setErrMessage(validatePass[1]);
+      return false;
+    }
+    if (!validateEmail(inputValues.email)) {
       setErrMessage('Invalid email address.');
       return false;
     }
-    const validPwd = validatePassword();
-    if (!validPwd[0]) {
-      setErrMessage(validPwd[1]);
-      return false;
-    }
-    setErrMessage(null);
+
     return true;
   }
 

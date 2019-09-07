@@ -11,6 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { signInUser } from '../../Helpers/Requests/sign/sign';
 import { setToken, hasError } from '../../Helpers/Methods/TokenHandeler';
+import { validatePassLen } from '../../Helpers/Validators/password';
+import { validateEmail } from '../../Helpers/Validators/email';
 
 
 const useStyles = makeStyles(theme => ({
@@ -61,25 +63,12 @@ const LoginPage = (props) => {
     setInputValues(inputValues => ({ ...inputValues, [event.target.name]: event.target.value }));
   }
 
-  const validateEmail = (value = inputValues.email) => {
-    const email = value;
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    return re.test(String(email).toLowerCase());
-  }
-
-  const validatePassword = (size = 4, value = inputValues.password) => {
-    const len = value.length;
-    if (len < size) return false;
-    return true;
-  }
-
   const validateAll = () => {
-    if (!validateEmail()) {
+    if (!validateEmail(inputValues.email)) {
       setErrMessage('Invalid email address.');
       return false;
     }
-    if (!validatePassword()) {
+    if (!validatePassLen(inputValues.password)) {
       setErrMessage('Password has to be atleast 4 characters long.');
       return false;
     }

@@ -1,5 +1,7 @@
 import jwt_decode from 'jwt-decode';
 
+/** global: localStorage */
+
 export const getToken = () => localStorage.getItem('userToken');
 export const removeToken = () => localStorage.removeItem('userToken');
 export const setToken = (value) => localStorage.setItem('userToken', value);
