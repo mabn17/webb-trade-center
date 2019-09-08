@@ -28,6 +28,31 @@ button {
   background-color: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C) !important;
 }
 
-/* @media screen and (max-width: 959px) {
-  main { min-height: 40vh; }
-} */
+.pagination {
+  margin-top: 25px;
+}
+
+.pagination span {
+  cursor: pointer;
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid #ddd;
+}
+
+.pagination span.active {
+  background: #0099FF;
+  color: white;
+  border: 1px solid #0099FF;
+}
+
+#react-paginate ul {
+  display: inline-block;
+  padding: 0 15px;
+}
+
+#react-paginate li {
+  display: inline-block;
+}

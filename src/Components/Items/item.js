@@ -61,10 +61,10 @@ const Item = (props) => {
         </CardContent>
         <CardActions>
           <Button size="small" color="primary" onClick={() => (handleRemoveItem())}>
-            View
+            Remove
           </Button>
           <Button size="small" color="primary" onClick={handleAddItem} >
-            Edit
+            Add
           </Button>
         </CardActions>
       </Card>
