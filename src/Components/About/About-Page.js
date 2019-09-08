@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Markdown from '../../Helpers/Markdown/markdown';
 import Jumbo from '../../Layout/jumbotron/jumbotron';
 
+import BlueWatch from '../../assets/img/ree.png';
+
 const useStyles = makeStyles(theme => ({
   markdown: {
     ...theme.typography.body2,
@@ -26,7 +28,7 @@ const AboutPage = () => {
 
   return (
     <>
-      <Jumbo image={'https://www.knar.com/wp-content/uploads/2015/08/rolex-header-banner-1400x600.jpg'} title={'Test'} text={'some breadcrumbs'} />
+      <Jumbo image={BlueWatch} title={'WTC'} text={'Buying and selling items has never been easier!'} />
       <Grid item xs={12} md={8}>
       <Typography variant="h6" gutterBottom>
         Webb Trade Center

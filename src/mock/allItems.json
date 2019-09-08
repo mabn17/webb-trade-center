@@ -1,0 +1,70 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Första Klocka",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 100.65,
+      "seller_id": 1,
+      "buyer_id": null,
+      "selling_date": "2019-03-10",
+      "bought": null
+    },
+    {
+      "id": 2,
+      "name": "Andra Klocka",
+      "description": "En rödare klocka",
+      "picture": null,
+      "price": 106.65,
+      "seller_id": 2,
+      "buyer_id": null,
+      "selling_date": "2019-04-10",
+      "bought": null
+    },
+    {
+      "id": 3,
+      "name": "Trea Klocka",
+      "description": "En blå klocka",
+      "picture": "https://images-na.ssl-images-amazon.com/images/I/81BDpSIwu3L._UL1500_.jpg",
+      "price": 10000.65,
+      "seller_id": 1,
+      "buyer_id": 2,
+      "selling_date": "2019-03-10",
+      "bought": "2019-06-20"
+    },
+    {
+      "id": 4,
+      "name": "Svart Klocka",
+      "description": "En svart klocka",
+      "picture": "https://www.netonnet.se/GetFile/ProductImagePrimary/telefoner/smartwatch/samsungsmartwatch/samsung-galaxy-watch-46mm-lte-silver(1004443)_6_Normal_Extra.jpg",
+      "price": 49.65,
+      "seller_id": 1,
+      "buyer_id": null,
+      "selling_date": "2019-03-11",
+      "bought": null
+    },
+    {
+      "id": 5,
+      "name": "Gul",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 106,
+      "seller_id": 2,
+      "buyer_id": 1,
+      "selling_date": "2019-03-10",
+      "bought": "2019-05-06"
+    },
+    {
+      "id": 6,
+      "name": "Kvinno Klocka",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 420.69,
+      "seller_id": 2,
+      "buyer_id": 1,
+      "selling_date": "2019-07-10",
+      "bought": "2019-07-13"
+    }
+  ]
+}

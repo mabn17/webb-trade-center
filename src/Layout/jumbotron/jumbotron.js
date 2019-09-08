@@ -10,13 +10,14 @@ const useStyles = (props, options) => {
     mainFeaturedPost: {
       position: 'relative',
       width: '100%',
-      backgroundColor: theme.palette.grey[800],
-      color: theme.palette.common.white,
+      backgroundColor: 'transparent',
+      color: theme.palette.common.black,
       marginBottom: theme.spacing(4),
       backgroundImage: `url(${props.image})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
+      boxShadow: 'none',
     },
     overlay: {
       position: 'absolute',
@@ -24,7 +25,7 @@ const useStyles = (props, options) => {
       bottom: 0,
       right: 0,
       left: 0,
-      backgroundColor: 'rgba(0,0,0,.3)',
+      backgroundColor: 'transparent',
     },
     mainFeaturedPostContent: {
       position: 'relative',
@@ -33,6 +34,7 @@ const useStyles = (props, options) => {
         padding: theme.spacing(6),
         paddingRight: 0,
       },
+      maxWidth: '70%'
     },
   }))(props, options);
 }
@@ -54,16 +56,21 @@ const Jumbo = (props) => {
       <Grid container>
         <Grid item md={6}>
           <div className={classes.mainFeaturedPostContent}>
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-            { props.title ? props.title : 'Title of a longer featured blog post' }
-            </Typography>
+            { props.title ? (
+              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                { props.title }
+              </Typography>
+            ) : null }
+           { props.text ? (
             <Typography variant="h5" color="inherit" paragraph>
-              { props.text ? props.text : `Multiple lines of text that form the lede, informing new readers quickly and
-              efficiently about what&apos;s most interesting in this post&apos;s contents.` }
+              { props.text }
             </Typography>
-            <Link variant="subtitle1" href="#">
-              { props.link ? props.link : 'Continue reading…' }
-            </Link>
+           ) : null }  
+            { props.link ? (
+              <Link variant="subtitle1" href="#">
+                { props.link }
+              </Link>
+            ) : null }
           </div>
         </Grid>
       </Grid>

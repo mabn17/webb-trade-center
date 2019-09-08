@@ -41,6 +41,11 @@ const useStyles = makeStyles(theme => ({
   },
   cardMedia: {
     width: 160,
+  },
+  center: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 }));
 
@@ -49,6 +54,12 @@ const HomePage = () => {
 
   return (
     <>
+    <Grid item xs={12} md={12}>
+        <Typography component="h2" variant="h4" className={classes.center} gutterBottom>
+          Watch the latest products
+        </Typography>
+        <Divider />
+      </Grid>
     {featuredItems.map(item => (
       <Grid item key={item.title} xs={12} md={6}>
         <CardActionArea component="a" href="#">

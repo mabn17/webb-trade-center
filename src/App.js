@@ -14,6 +14,7 @@ import MyAccountPage from './Components/Account/My-Account-Page';
 import LoginPage from './Components/Login/Login-Page';
 import RegisterPage from './Components/Register/Register-Page';
 import FoFPage from './Components/FoF/FoF-Page';
+import AllItemsPage from './Components/Items/All-Items-Page';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,6 +40,7 @@ const App = () => {
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/about" component={AboutPage} />
+                <Route exact path="/clocks" component={AllItemsPage} />
                 <Route exact path="/account" render={(props) => <MyAccountPage {...props} updateAll={refresh} />} />
                 <Route path="/login" render={(props) => <LoginPage {...props} updateAll={refresh} />} />
                 <Route path="/register" render={(props) => <RegisterPage {...props} updateAll={refresh} />} />
