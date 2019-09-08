@@ -113,6 +113,7 @@ const AllItemsPage = (props) => {
   }
 
   const handlePage = (e, nextPage) => {
+    e.preventDefault();
     setPage(nextPage);
   }
 
