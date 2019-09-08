@@ -28,13 +28,11 @@ export const removeItem = (value) => {
   // eslint-disable-next-line no-unused-vars
   for (const item of arr) {
     if (item.id === value.id) {
-      console.log('match');
       arr.splice(counter, 1);
       break;
     }
     counter += 1;
   }
-  
-  console.log(arr);
+
   setItems({ items: arr });
 }
