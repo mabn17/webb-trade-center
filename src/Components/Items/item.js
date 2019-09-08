@@ -8,6 +8,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import {
+  addItem,
+  removeItem
+} from '../../Helpers/Methods/ShoppingItems';
 
 import DefaultImg from '../../assets/img/default.jpg';
 
@@ -28,6 +32,17 @@ const useStyles = makeStyles(theme => ({
 const Item = (props) => {
   const classes = useStyles();
 
+  const handleAddItem = () => {
+    addItem(props.item);
+    props.newItem();
+  }
+
+  const handleRemoveItem = () => {
+    removeItem(props.item);
+    console.log('hs');
+    props.newItem();
+  }
+
   return (
     <Grid item key={props.item.id} xs={12} sm={6} md={4}>
       <Card className={classes.card}>
@@ -45,10 +60,10 @@ const Item = (props) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={() => (handleRemoveItem())}>
             View
           </Button>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={handleAddItem} >
             Edit
           </Button>
         </CardActions>

@@ -5,11 +5,12 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-
+import ShoppingCart from '../Cart/Shopping-Cart';
 import {
   getToken,
   decodeToken
 } from '../../Helpers/Methods/TokenHandeler';
+
 import Items from '../../mock/allItems.json';
 import Clock from './item';
 
@@ -42,6 +43,7 @@ const MyAccount = (props) => {
   const [token, setToken] = React.useState({});
   const [clocks, setClocks] = React.useState([]);
   const [search, setSearch] = React.useState('');
+  const [newItem, setNewItem] = React.useState(false);
 
   React.useEffect(() => {
     setClocks(Items.items);
@@ -54,25 +56,29 @@ const MyAccount = (props) => {
   }, [encoded, props]);
 
   const updateSearch = (e) => (setSearch(e.target.value));
-
   const RenderChildren = () => {
     let arr = [];
 
     clocks.forEach((item) => {
       if (item.name.toLowerCase().includes(search.toLowerCase())) {
-        arr.push(<Clock token={token} item={item} key={item.id} />);
+        arr.push(<Clock token={token} item={item} key={item.id} newItem={addNewItem} />);
       }
     });
 
     return arr.length === 0 ? (<b>No matching clocks.</b>) : clocks.map((item) => {
       if (item.name.toLowerCase().includes(search.toLowerCase())) {
-        return <Clock token={token} item={item} key={item.id} />;
+        return <Clock token={token} item={item} key={item.id} newItem={addNewItem} />;
       }
+      return null;
     });
+  }
+  const addNewItem = () => {
+    setNewItem(!newItem);
   }
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
+      <ShoppingCart token={token} newItem={newItem} />
       <form className={classes.container} noValidate autoComplete="off">
         <TextField
           id="standard-full-width"
@@ -92,7 +98,7 @@ const MyAccount = (props) => {
       </form>
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          <RenderChildren />
+         <RenderChildren />
         </Grid>
       </Container>
     </Container>
