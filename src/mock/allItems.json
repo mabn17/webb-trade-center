@@ -65,6 +65,94 @@
       "buyer_id": 1,
       "selling_date": "2019-07-10",
       "bought": "2019-07-13"
+    },
+    {
+      "id": 7,
+      "name": "Gul",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 106,
+      "seller_id": 2,
+      "buyer_id": 1,
+      "selling_date": "2019-03-10",
+      "bought": "2019-05-06"
+    },
+    {
+      "id": 8,
+      "name": "Kvinno Klocka",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 420.69,
+      "seller_id": 2,
+      "buyer_id": 1,
+      "selling_date": "2019-07-10",
+      "bought": "2019-07-13"
+    },
+    {
+      "id": 9,
+      "name": "Gul",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 106,
+      "seller_id": 2,
+      "buyer_id": 1,
+      "selling_date": "2019-03-10",
+      "bought": "2019-05-06"
+    },
+    {
+      "id": 10,
+      "name": "Kvinno Klocka",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 420.69,
+      "seller_id": 2,
+      "buyer_id": 1,
+      "selling_date": "2019-07-10",
+      "bought": "2019-07-13"
+    },
+    {
+      "id": 11,
+      "name": "Gul",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 106,
+      "seller_id": 2,
+      "buyer_id": 1,
+      "selling_date": "2019-03-10",
+      "bought": "2019-05-06"
+    },
+    {
+      "id": 12,
+      "name": "Kvinno Klocka",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 420.69,
+      "seller_id": 2,
+      "buyer_id": 1,
+      "selling_date": "2019-07-10",
+      "bought": "2019-07-13"
+    },
+    {
+      "id": 13,
+      "name": "Kvinno Klocka",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 420.69,
+      "seller_id": 2,
+      "buyer_id": 1,
+      "selling_date": "2019-07-10",
+      "bought": "2019-07-13"
+    },
+    {
+      "id": 14,
+      "name": "Kvinno Klocka",
+      "description": "En röd klocka",
+      "picture": null,
+      "price": 420.69,
+      "seller_id": 2,
+      "buyer_id": 1,
+      "selling_date": "2019-07-10",
+      "bought": "2019-07-13"
     }
   ]
 }

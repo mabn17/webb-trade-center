@@ -59,6 +59,7 @@ const AllItemsPage = (props) => {
   const [totalShown, setTotalShown] = React.useState(0);
   const [page, setPage] = React.useState(0);
   const [error, setError] = React.useState(0);
+  const [lastIndex, setLastIndex] = React.useState(0);
 
   React.useEffect(() => {
     setClocks(Items.items);
@@ -77,20 +78,32 @@ const AllItemsPage = (props) => {
 
   const RenderChildren = () => {
     let arr = [];
+    let totalHolder = 0;
 
     clocks.forEach((item, i) => {
       if (item.name.toLowerCase().includes(search.toLowerCase())) {
         arr.push(i);
+        totalHolder += 1;
       }
     });
 
-    setTotalShown(arr.length);
-    arr.length === 0 ? setError('No matching clocks') : setError(null);
-    return arr.length === 0 ? null : clocks.map((item) => {
-      if (item.name.toLowerCase().includes(search.toLowerCase())) {
-        return <Clock token={token} item={item} key={item.id} newItem={addNewItem} />;
-      }
+    const first = (page * rowsPerPage || 0);
+    const second = ((page * 4) + rowsPerPage);
+
+    const ph = arr.slice(first, second);
+
+    setTotalShown(totalHolder);
+    if (!totalHolder) {
+      setError('No matching clocks');
       return null;
+    }
+
+    setError(null);
+    return ph.map((index) => {
+      const item = clocks[index];
+      setLastIndex(index);
+
+      return (<Clock token={token} item={item} key={item.id} newItem={addNewItem} />);
     });
   }
 
@@ -105,6 +118,7 @@ const AllItemsPage = (props) => {
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handlePage}
+          ref={this}
         />
   );
 
@@ -144,7 +158,7 @@ const AllItemsPage = (props) => {
         <Grid container spacing={4}>
           <RenderChildren />
         </Grid>
-        <RenderPagination />
+        { lastIndex === totalShown - 1 ? null : <RenderPagination /> }
       </Container>
     </Container>
   );

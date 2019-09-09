@@ -7,6 +7,7 @@ import {
 } from '../ShoppingItems';
 
 /* global it expect localStorage */
+/** global: localStorage */
 
 const defaultValue = { items: [] };
 const extraItem = { items: ['hello'] };
