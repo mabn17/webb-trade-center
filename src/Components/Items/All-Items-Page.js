@@ -135,7 +135,6 @@ const AllItemsPage = (props) => {
     <Container className={classes.cardGrid} maxWidth="md">
       <ShoppingCart token={token} newItem={newItem} />
       <div className={classes.container} >
-        <b>{ page }</b>
         <TextField
           id="standard-full-width"
           label="Search"
