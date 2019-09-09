@@ -1,6 +1,5 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
-import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -22,7 +21,7 @@ import {
 } from '../../Helpers/Methods/ShoppingItems';
 
 
-const defaultToken = { id: 2, assets: 600, email: '' };
+const defaultToken = { id: 0, assets: 0, email: '' };
 const defaultItems = { "items": [] };
 
 const useStyles = makeStyles(theme => ({
@@ -54,10 +53,6 @@ const useStyles = makeStyles(theme => ({
     color: 'green',
   }
 }));
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const ShoppingCart = (props) => {
   const classes = useStyles();
@@ -120,7 +115,7 @@ const ShoppingCart = (props) => {
   }
 
   const CartDialog = () => (
-    <Dialog disableBackdropClick fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+    <Dialog disableBackdropClick fullScreen open={open} onClose={handleClose} transitionDuration={0}>
       <AppBar className={`${classes.appBar} ${classes.gradient}`}>
         <Toolbar disableTriggerFocus={true}>
           <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">

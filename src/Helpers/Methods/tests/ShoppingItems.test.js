@@ -3,7 +3,8 @@ import {
   setItems,
   removeItems,
   addItem,
-  removeItem
+  removeItem,
+  sumArr
 } from '../ShoppingItems';
 
 /* global it expect localStorage */
@@ -58,4 +59,11 @@ it('Testing removeItem method', () => {
   expect(getItems()).toEqual(corrTwo);
 
   localStorage.removeItem('shoppingItems');
+});
+
+it('Testing sumArr method', () => {
+  const numberArr = [{ price: 1 }, { price: null }, { price: 2 }, { price: 3 }];
+  const answer = 1 + 2 + 3;
+
+  expect(sumArr(numberArr, 'price')).toEqual(answer);
 });
