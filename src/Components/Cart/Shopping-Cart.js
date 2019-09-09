@@ -16,10 +16,13 @@ import SubtractIcon from '@material-ui/icons/Minimize';
 import backgroundC from './css/backgound';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  getItems
+  getItems,
+  removeItem,
+  sumArr
 } from '../../Helpers/Methods/ShoppingItems';
 
-// const defaultToken = { id: 0, assets: 0, email: '' };
+
+const defaultToken = { id: 2, assets: 600, email: '' };
 const defaultItems = { "items": [] };
 
 const useStyles = makeStyles(theme => ({
@@ -29,7 +32,6 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     position: 'relative',
-    background: 'red'
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -42,6 +44,15 @@ const useStyles = makeStyles(theme => ({
   negative: {
     borderBottom: `1px solid ${theme.palette.divider}`
   },
+  right: {
+    margin: '40px',
+  },
+  warning: {
+    color: 'red',
+  },
+  ok: {
+    color: 'green',
+  }
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -51,6 +62,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const ShoppingCart = (props) => {
   const classes = useStyles();
   // const token = props.token ? props.token : defaultToken;
+  const token = defaultToken;
   const [shopItems, setShopItems] = React.useState(getItems());
   const [open, setOpen] = React.useState(false);
   const [disabled, setDisabled] = React.useState(true);
@@ -58,6 +70,11 @@ const ShoppingCart = (props) => {
   React.useEffect(() => {
     setShopItems(getItems());
   }, [props.newItem]);
+
+  const handleRemoveItem = (item) => {
+    removeItem(item);
+    props.updateAll();
+  };
 
   const DisplayItems = () => {
     if (shopItems.items.length === defaultItems.items.length) {
@@ -69,14 +86,30 @@ const ShoppingCart = (props) => {
     let keyId = 0;
     return shopItems.items.map((item) => {
       keyId += 1;
+
       return (
         <ListItem button key={`${keyId}${item.price}`} className={classes.negative} >
           <ListItemText primary={item.name} secondary={`${item.price} kr.`} />
-          <IconButton><SubtractIcon /></IconButton>
+          <IconButton onClick={() => handleRemoveItem(item)}><SubtractIcon /></IconButton>
         </ListItem>
       );
     });
   };
+
+  const RenderBalance = () => (
+    <>
+      {!token.id ? null : (<><b style={{ marginRight: '10px' }}>Current Balance:</b> {token.assets} kr<br /></>) }
+      <b style={{ marginRight: '94px' }}>Cost:</b>{' -' + sumArr(shopItems.items, 'price') + ' kr'}
+      { !token.id ? null : (
+        <>
+          <hr />
+          <div className={ (token.assets - sumArr(shopItems.items, 'price')) < 0 ? classes.warning : classes.ok }>
+            <b style={{ marginRight: '102px' }}>Left:</b> { Math.round((token.assets - sumArr(shopItems.items, 'price')) * 100) / 100 } kr.
+          </div>
+        </>
+      )}
+    </>
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -87,9 +120,9 @@ const ShoppingCart = (props) => {
   }
 
   const CartDialog = () => (
-    <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+    <Dialog disableBackdropClick fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
       <AppBar className={`${classes.appBar} ${classes.gradient}`}>
-        <Toolbar>
+        <Toolbar disableTriggerFocus={true}>
           <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
             <CloseIcon />
           </IconButton>
@@ -104,6 +137,9 @@ const ShoppingCart = (props) => {
       <List>
         <DisplayItems />
       </List>
+      <Typography className={classes.right} >
+        { shopItems.items.length === 0 ? <b>No items in cart</b> : <RenderBalance /> }
+      </Typography>
     </Dialog>
   );
 

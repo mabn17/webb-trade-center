@@ -12,6 +12,7 @@ import {
   getToken,
   decodeToken
 } from '../../Helpers/Methods/TokenHandeler';
+import { removeItem } from '../../Helpers/Methods/ShoppingItems';
 
 import Items from '../../mock/allItems.json';
 import Clock from './item';
@@ -81,7 +82,7 @@ const AllItemsPage = (props) => {
     let totalHolder = 0;
 
     clocks.forEach((item, i) => {
-      if (item.name.toLowerCase().includes(search.toLowerCase())) {
+      if (item.name.toLowerCase().includes(search.toLowerCase()) && (removeItem(item, true) === false)) {
         arr.push(i);
         totalHolder += 1;
       }
@@ -133,7 +134,7 @@ const AllItemsPage = (props) => {
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
-      <ShoppingCart token={token} newItem={newItem} />
+      <ShoppingCart token={token} newItem={newItem} updateAll={addNewItem} />
       <div className={classes.container} >
         <TextField
           id="standard-full-width"

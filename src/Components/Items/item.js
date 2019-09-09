@@ -9,13 +9,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  addItem,
-  removeItem
+  addItem
 } from '../../Helpers/Methods/ShoppingItems';
 
 import DefaultImg from '../../assets/img/default.jpg';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(_theme => ({
   card: {
     height: '100%',
     display: 'flex',
@@ -30,16 +29,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Item = (props) => {
+  const [hasBeenClicked, setHasBeenClicked] = React.useState(false);
   const classes = useStyles();
 
   const handleAddItem = () => {
+    setHasBeenClicked(true);
     addItem(props.item);
-    props.newItem();
-  }
-
-  const handleRemoveItem = () => {
-    removeItem(props.item);
-    console.log('hs');
     props.newItem();
   }
 
@@ -60,11 +55,11 @@ const Item = (props) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" color="primary" onClick={() => (handleRemoveItem())}>
-            Remove
+          <Button size="small" color="primary" onClick={() => (undefined)}>
+            View
           </Button>
-          <Button size="small" color="primary" onClick={handleAddItem} >
-            Add
+          <Button size="small" color="primary" disabled={hasBeenClicked} onClick={handleAddItem} >
+            Add to cart
           </Button>
         </CardActions>
       </Card>
