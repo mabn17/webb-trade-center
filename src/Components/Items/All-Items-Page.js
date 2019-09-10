@@ -103,6 +103,7 @@ const AllItemsPage = (props) => {
     return ph.map((index) => {
       const item = clocks[index];
       setLastIndex(index);
+      console.log(token);
 
       return (<Clock token={token} item={item} key={item.id} newItem={addNewItem} />);
     });

@@ -56,8 +56,8 @@ const useStyles = makeStyles(theme => ({
 
 const ShoppingCart = (props) => {
   const classes = useStyles();
-  // const token = props.token ? props.token : defaultToken;
-  const token = defaultToken;
+  const token = props.token ? props.token : defaultToken;
+  // const token = defaultToken;
   const [shopItems, setShopItems] = React.useState(getItems());
   const [open, setOpen] = React.useState(false);
   const [disabled, setDisabled] = React.useState(true);
