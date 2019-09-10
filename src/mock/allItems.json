@@ -2,42 +2,30 @@
   "items": [
     {
       "id": 1,
-      "name": "Första Klocka",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 100.65,
-      "seller_id": 1,
-      "buyer_id": null,
-      "selling_date": "2019-03-10",
-      "bought": null
+      "name": "Gold",
+      "description": "Some gold",
+      "picture": "https://www.goodreturns.in/img/2019/08/gold-1565419690.jpg",
+      "price": 100.65
     },
     {
       "id": 2,
-      "name": "Andra Klocka",
-      "description": "En rödare klocka",
-      "picture": null,
-      "price": 106.65,
-      "seller_id": 2,
-      "buyer_id": null,
-      "selling_date": "2019-04-10",
-      "bought": null
+      "name": "Silver",
+      "description": "Shiny silver",
+      "picture": "https://static2.proactiveinvestors.co.uk/thumbs/upload/News/Image/2019_08/672z311_1567003954_shutterstock_256676086.jpg",
+      "price": 106.65
     },
     {
       "id": 3,
-      "name": "Trea Klocka",
-      "description": "En blå klocka",
-      "picture": "https://images-na.ssl-images-amazon.com/images/I/81BDpSIwu3L._UL1500_.jpg",
-      "price": 10000.65,
-      "seller_id": 1,
-      "buyer_id": 2,
-      "selling_date": "2019-03-10",
-      "bought": "2019-06-20"
+      "name": "Copper",
+      "description": "Our finest copper",
+      "picture": "https://ak8.picdn.net/shutterstock/videos/34795558/thumb/1.jpg",
+      "price": 10000.65
     },
     {
       "id": 4,
-      "name": "Svart Klocka",
-      "description": "En svart klocka",
-      "picture": "https://www.netonnet.se/GetFile/ProductImagePrimary/telefoner/smartwatch/samsungsmartwatch/samsung-galaxy-watch-46mm-lte-silver(1004443)_6_Normal_Extra.jpg",
+      "name": "Palladium",
+      "description": "No idea what this is.",
+      "picture": "https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/r-tPTIvHGjcujl71k/videoblocks-palladium-bars-background-animation-3d-rendering_rzuckvpsg_thumbnail-full01.png",
       "price": 49.65,
       "seller_id": 1,
       "buyer_id": null,
@@ -46,113 +34,24 @@
     },
     {
       "id": 5,
-      "name": "Gul",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 106,
-      "seller_id": 2,
-      "buyer_id": 1,
-      "selling_date": "2019-03-10",
-      "bought": "2019-05-06"
+      "name": "Rhenium",
+      "description": "A rare mineral",
+      "picture": "https://www.refractorymetal.org/wp-content/uploads/2018/01/pure-Rhenium.jpg",
+      "price": 106
     },
     {
       "id": 6,
-      "name": "Kvinno Klocka",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 420.69,
-      "seller_id": 2,
-      "buyer_id": 1,
-      "selling_date": "2019-07-10",
-      "bought": "2019-07-13"
+      "name": "Osmium",
+      "description": "One of the heviest minerals on earth",
+      "picture": "https://images.bonnier.cloud/files/ill/production/2018/10/14001131/osmium.jpg",
+      "price": 420.69
     },
     {
       "id": 7,
-      "name": "Gul",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 106,
-      "seller_id": 2,
-      "buyer_id": 1,
-      "selling_date": "2019-03-10",
-      "bought": "2019-05-06"
-    },
-    {
-      "id": 8,
-      "name": "Kvinno Klocka",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 420.69,
-      "seller_id": 2,
-      "buyer_id": 1,
-      "selling_date": "2019-07-10",
-      "bought": "2019-07-13"
-    },
-    {
-      "id": 9,
-      "name": "Gul",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 106,
-      "seller_id": 2,
-      "buyer_id": 1,
-      "selling_date": "2019-03-10",
-      "bought": "2019-05-06"
-    },
-    {
-      "id": 10,
-      "name": "Kvinno Klocka",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 420.69,
-      "seller_id": 2,
-      "buyer_id": 1,
-      "selling_date": "2019-07-10",
-      "bought": "2019-07-13"
-    },
-    {
-      "id": 11,
-      "name": "Gul",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 106,
-      "seller_id": 2,
-      "buyer_id": 1,
-      "selling_date": "2019-03-10",
-      "bought": "2019-05-06"
-    },
-    {
-      "id": 12,
-      "name": "Kvinno Klocka",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 420.69,
-      "seller_id": 2,
-      "buyer_id": 1,
-      "selling_date": "2019-07-10",
-      "bought": "2019-07-13"
-    },
-    {
-      "id": 13,
-      "name": "Kvinno Klocka",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 420.69,
-      "seller_id": 2,
-      "buyer_id": 1,
-      "selling_date": "2019-07-10",
-      "bought": "2019-07-13"
-    },
-    {
-      "id": 14,
-      "name": "Kvinno Klocka",
-      "description": "En röd klocka",
-      "picture": null,
-      "price": 420.69,
-      "seller_id": 2,
-      "buyer_id": 1,
-      "selling_date": "2019-07-10",
-      "bought": "2019-07-13"
+      "name": "Mercury",
+      "description": "Its deadly",
+      "picture": "https://www.thebalance.com/thmb/xBwp2veZA_1i1fas8GH1ioSViCg=/3042x2282/smart/filters:no_upscale()/quicksilver-93292637-b2eb7c7902e04e93b371b22a06d099f5.jpg",
+      "price": 106
     }
   ]
 }

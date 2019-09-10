@@ -82,9 +82,11 @@ const AllItemsPage = (props) => {
     let totalHolder = 0;
 
     clocks.forEach((item, i) => {
-      if (item.name.toLowerCase().includes(search.toLowerCase()) && (removeItem(item, true) === false)) {
-        arr.push(i);
-        totalHolder += 1;
+      if (item.name.toLowerCase().includes(search.toLowerCase())) {
+        // if (token.id !== item.seller_id && item.buyer_id === null) {
+          arr.push(i);
+          totalHolder += 1;
+        // }
       }
     });
 
@@ -103,7 +105,6 @@ const AllItemsPage = (props) => {
     return ph.map((index) => {
       const item = clocks[index];
       setLastIndex(index);
-      console.log(token);
 
       return (<Clock token={token} item={item} key={item.id} newItem={addNewItem} />);
     });

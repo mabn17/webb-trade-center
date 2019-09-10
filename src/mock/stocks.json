@@ -1,0 +1,25 @@
+{
+    "items": [
+      {
+        "id": 1,
+        "item_name": "Gold",
+        "amount": 20,
+        "buyer_id": 1,
+        "buy_in_price": 100
+      },
+      {
+        "id": 2,
+        "item_name": "Silver",
+        "amount": 4,
+        "buyer_id": 1,
+        "buy_in_price": 200
+      },
+      {
+        "id": 3,
+        "item_name": "Palladium",
+        "amount": 12,
+        "buyer_id": 1,
+        "buy_in_price": 300
+      }
+    ]
+  }

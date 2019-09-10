@@ -1,6 +1,7 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
+import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -12,14 +13,27 @@ import Button from '@material-ui/core/Button';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import CloseIcon from '@material-ui/icons/Close';
 import SubtractIcon from '@material-ui/icons/Minimize';
+import AdditionIcon from '@material-ui/icons/Add';
 import backgroundC from './css/backgound';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   getItems,
   removeItem,
-  sumArr
+  sumArr,
+  addItem,
+  removeItems
 } from '../../Helpers/Methods/ShoppingItems';
 
+function countArray(arr, what) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].id === what) {
+      count++;
+    }
+  }
+
+  return count;
+};
 
 const defaultToken = { id: 0, assets: 0, email: '' };
 const defaultItems = { "items": [] };
@@ -51,13 +65,19 @@ const useStyles = makeStyles(theme => ({
   },
   ok: {
     color: 'green',
+  },
+  remove: {
+    fontSize: '12px',
+    float: 'right',
+    margin: '10px 20px',
+    border: `1px solid ${theme.palette.divider}`,
+    backgroundColor: 'rgba(255, 26, 66, 0.1)'
   }
 }));
 
 const ShoppingCart = (props) => {
   const classes = useStyles();
   const token = props.token ? props.token : defaultToken;
-  // const token = defaultToken;
   const [shopItems, setShopItems] = React.useState(getItems());
   const [open, setOpen] = React.useState(false);
   const [disabled, setDisabled] = React.useState(true);
@@ -70,6 +90,14 @@ const ShoppingCart = (props) => {
     removeItem(item);
     props.updateAll();
   };
+  const handleAddItem = (item) => {
+    addItem(item);
+    props.updateAll();
+  };
+  const handleRemoveAll = () => {
+    removeItems();
+    props.updateAll();
+  }
 
   const DisplayItems = () => {
     if (shopItems.items.length === defaultItems.items.length) {
@@ -79,29 +107,36 @@ const ShoppingCart = (props) => {
 
     setDisabled(false);
     let keyId = 0;
+    let arrId = [];
+    
     return shopItems.items.map((item) => {
-      keyId += 1;
-
-      return (
-        <ListItem button key={`${keyId}${item.price}`} className={classes.negative} >
-          <ListItemText primary={item.name} secondary={`${item.price} kr.`} />
-          <IconButton onClick={() => handleRemoveItem(item)}><SubtractIcon /></IconButton>
-        </ListItem>
-      );
+      if (arrId.indexOf(item.id) === -1) {
+        keyId += 1;
+        const accurences = countArray(shopItems.items, item.id);
+        arrId.push(item.id);
+        return (
+          <ListItem button key={`${keyId}${item.price}`} className={classes.negative} >
+            <ListItemText primary={item.name} secondary={`${item.price} kr/st.`} />
+            <IconButton onClick={() => handleAddItem(item)}><AdditionIcon /></IconButton>
+              <span style={{ margin: '0 5px' }}>{accurences}</span>
+            <IconButton style={ { marginTop: '-15px' } }onClick={() => handleRemoveItem(item)}><SubtractIcon /></IconButton>
+          </ListItem>
+        );
+      }
     });
   };
 
   const RenderBalance = () => (
     <>
-      {!token.id ? null : (<><b style={{ marginRight: '10px' }}>Current Balance:</b> {token.assets} kr<br /></>) }
+      {!token.id ? null : (<><b style={{ marginRight: '20px' }}>Current Balance:</b> {token.assets} kr<br /></>) }
       <b style={{ marginRight: '94px' }}>Cost:</b>{' -' + sumArr(shopItems.items, 'price') + ' kr'}
       { !token.id ? null : (
-        <>
+        <React.Fragment>
           <hr />
           <div className={ (token.assets - sumArr(shopItems.items, 'price')) < 0 ? classes.warning : classes.ok }>
             <b style={{ marginRight: '102px' }}>Left:</b> { Math.round((token.assets - sumArr(shopItems.items, 'price')) * 100) / 100 } kr.
           </div>
-        </>
+        </React.Fragment>
       )}
     </>
   );
@@ -117,7 +152,7 @@ const ShoppingCart = (props) => {
   const CartDialog = () => (
     <Dialog disableBackdropClick fullScreen open={open} onClose={handleClose} transitionDuration={0}>
       <AppBar className={`${classes.appBar} ${classes.gradient}`}>
-        <Toolbar disableTriggerFocus={true}>
+        <Toolbar>
           <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
             <CloseIcon />
           </IconButton>
@@ -132,9 +167,16 @@ const ShoppingCart = (props) => {
       <List>
         <DisplayItems />
       </List>
-      <Typography className={classes.right} >
+      <Typography component={'span'} variant={'body2'} className={classes.right} >
         { shopItems.items.length === 0 ? <b>No items in cart</b> : <RenderBalance /> }
       </Typography>
+      { shopItems.items.length === 0 ? null :
+        <Grid item md={12} sm={12}>
+          <Button onClick={handleRemoveAll} className={classes.remove}>
+            Remove all items
+          </Button>
+        </Grid>
+      }
     </Dialog>
   );
 
