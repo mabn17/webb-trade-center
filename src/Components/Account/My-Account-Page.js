@@ -7,8 +7,10 @@ import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   getToken,
-  decodeToken,
-  hasAuth
+  decodeToken
+  /*,
+    hasAuth
+  */
 } from '../../Helpers/Methods/TokenHandeler';
 
 import Deposits from './balance';

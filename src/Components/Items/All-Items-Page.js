@@ -12,7 +12,6 @@ import {
   getToken,
   decodeToken
 } from '../../Helpers/Methods/TokenHandeler';
-import { removeItem } from '../../Helpers/Methods/ShoppingItems';
 
 import Items from '../../mock/allItems.json';
 import Clock from './item';

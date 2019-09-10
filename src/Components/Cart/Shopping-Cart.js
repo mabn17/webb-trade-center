@@ -97,6 +97,8 @@ const ShoppingCart = (props) => {
   const handleRemoveAll = () => {
     removeItems();
     props.updateAll();
+
+    return undefined;
   }
 
   const DisplayItems = () => {
@@ -119,7 +121,7 @@ const ShoppingCart = (props) => {
             <ListItemText primary={item.name} secondary={`${item.price} kr/st.`} />
             <IconButton onClick={() => handleAddItem(item)}><AdditionIcon /></IconButton>
               <span style={{ margin: '0 5px' }}>{accurences}</span>
-            <IconButton style={ { marginTop: '-15px' } }onClick={() => handleRemoveItem(item)}><SubtractIcon /></IconButton>
+            <IconButton style={ { marginTop: '-15px' } } onClick={() => handleRemoveItem(item)}><SubtractIcon /></IconButton>
           </ListItem>
         );
       }
