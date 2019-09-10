@@ -50,7 +50,9 @@
       "src/**/*.{js,jsx}",
       "!src/index.js",
       "!src/Components/Items/item.js",
-      "!src/serviceWorker.js"
+      "!src/Helpers/Markdown/markdown.js",
+      "!src/serviceWorker.js",
+      "!src/Components/Cart/Shopping-Cart.js"
     ]
   }
 }

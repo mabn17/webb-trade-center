@@ -52,4 +52,5 @@ it('Testing hasAuth method', () => {
 
   expect(hasAuth(tokenOne, props)).toEqual(undefined);
   expect(hasAuth(tokenTwo, props)).toEqual(undefined);
+  expect(hasAuth(null, props)).toEqual(undefined);
 });

@@ -59,6 +59,9 @@ it('Testing removeItem method', () => {
   expect(getItems()).toEqual(corrTwo);
 
   localStorage.removeItem('shoppingItems');
+  setItems(objValues);
+  expect(removeItem({ id: 1 }, true)).toEqual([{"id": 1}]);
+  localStorage.removeItem('shoppingItems');
 });
 
 it('Testing sumArr method', () => {
