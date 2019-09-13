@@ -89,16 +89,20 @@ const ShoppingCart = (props) => {
   const handleRemoveItem = (item) => {
     removeItem(item);
     props.updateAll();
+
+    return null;
   };
   const handleAddItem = (item) => {
     addItem(item);
     props.updateAll();
+
+    return null;
   };
   const handleRemoveAll = () => {
     removeItems();
     props.updateAll();
 
-    return undefined;
+    return null;
   }
 
   const DisplayItems = () => {
@@ -125,6 +129,7 @@ const ShoppingCart = (props) => {
           </ListItem>
         );
       }
+      return null;
     });
   };
 

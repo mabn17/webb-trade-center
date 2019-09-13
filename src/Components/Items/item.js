@@ -13,8 +13,6 @@ import {
   addItem
 } from '../../Helpers/Methods/ShoppingItems';
 
-import DefaultImg from '../../assets/img/default.jpg';
-
 const useStyles = makeStyles(_theme => ({
   card: {
     height: '100%',
@@ -49,7 +47,7 @@ const Item = (props) => {
       <Card className={classes.card}>
         <CardMedia
           className={classes.cardMedia}
-          image={ props.item.picture ? props.item.picture :  DefaultImg }
+          image={props.item.picture}
           title={props.item.name}
         />
         <CardContent className={classes.cardContent}>

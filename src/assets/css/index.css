@@ -56,3 +56,10 @@ button {
 #react-paginate li {
   display: inline-block;
 }
+
+.caps-dad span {
+  display: inline-block;
+}
+.caps::first-letter {
+  text-transform: uppercase !important;
+}

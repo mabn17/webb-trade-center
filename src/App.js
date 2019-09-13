@@ -28,6 +28,7 @@ const App = () => {
   const [update, setUpdate] = React.useState(false);
   const classes = useStyles();
 
+  // Update <Header /> values from Route components
   const refresh = () => (setUpdate(!update));
 
   return (
@@ -41,8 +42,8 @@ const App = () => {
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/about" component={AboutPage} />
-                <Route exact path="/clocks" component={AllItemsPage} />
-                <Route exact path="/clocks/:name" component={SpesificItemPage} />
+                <Route exact path="/stocks" component={AllItemsPage} />
+                <Route exact path="/stocks/:name" component={SpesificItemPage} />
                 <Route exact path="/account" render={(props) => <MyAccountPage {...props} updateAll={refresh} />} />
                 <Route path="/login" render={(props) => <LoginPage {...props} updateAll={refresh} />} />
                 <Route path="/register" render={(props) => <RegisterPage {...props} updateAll={refresh} />} />

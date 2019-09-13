@@ -22,7 +22,7 @@ const rows = [
 const Orders = () => (
   <>
     <Typography component="h2" variant="h6" gutterBottom>
-      My Investments
+      Active Investments
     </Typography>
     <Table size="small">
       <TableHead>

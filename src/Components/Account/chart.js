@@ -24,7 +24,7 @@ const Chart = (props) => {
   return (
     <>
       <Typography component="h2" variant="h6" gutterBottom>
-        Prices { props.item ? props.item.name : '-' }
+      <b>{ props.stock ? props.stock.item_name : '-' }</b> Prices
       </Typography>
       <ResponsiveContainer>
         <LineChart

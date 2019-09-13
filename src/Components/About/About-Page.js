@@ -6,8 +6,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Markdown from '../../Helpers/Markdown/markdown';
 import Jumbo from '../../Layout/jumbotron/jumbotron';
-
-import BlueWatch from '../../assets/img/ree.png';
+import HeaderImg from '../../assets/img/test.png';
+import {
+  socket,
+  emitMessage
+} from '../../Helpers/Sockets/Sockets';
 
 const useStyles = makeStyles(theme => ({
   markdown: {
@@ -24,11 +27,19 @@ const AboutPage = () => {
     fetch(`${process.env.PUBLIC_URL}/pages/About.md`)
       .then(res => res.text())
       .then(text => setMarkdown(text));
+    
+    emitMessage('Nu har jag fått min About.md');
   });
+
+  React.useEffect(() => {
+    socket.on('message', (msg) => {
+      console.log('fick meddelande: ', msg);
+    });
+  }, []);
 
   return (
     <>
-      <Jumbo image={BlueWatch} title={'WTC'} text={'Buying and selling items has never been easier!'} />
+      <Jumbo image={HeaderImg} title={'WTC'} text={'Buying and selling items has never been easier!'} />
       <Grid item xs={12} md={8}>
       <Typography variant="h6" gutterBottom>
         Webb Trade Center

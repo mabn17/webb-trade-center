@@ -16,6 +16,8 @@ import {
 import Items from '../../mock/allItems.json';
 import Clock from './item';
 
+import { getAllStocks } from '../../Helpers/Requests/stocks/stocks';
+
 const useStyles = makeStyles(theme => ({
   cardGrid: {
     paddingTop: theme.spacing(8),
@@ -53,7 +55,7 @@ const AllItemsPage = (props) => {
   const classes = useStyles();
   const encoded = getToken();
   const [token, setToken] = React.useState({});
-  const [clocks, setClocks] = React.useState([]);
+  const [stocks, setStocks] = React.useState([]);
   const [search, setSearch] = React.useState('');
   const [newItem, setNewItem] = React.useState(false);
   const [totalShown, setTotalShown] = React.useState(0);
@@ -62,7 +64,8 @@ const AllItemsPage = (props) => {
   const [lastIndex, setLastIndex] = React.useState(0);
 
   React.useEffect(() => {
-    setClocks(Items.items);
+    // setStocks(Items.items);
+    getAllStocks().then(res => setStocks(res.items));
 
     if (!encoded) {
       setToken({ id: 0, assets: 0, email: '' });
@@ -80,12 +83,10 @@ const AllItemsPage = (props) => {
     let arr = [];
     let totalHolder = 0;
 
-    clocks.forEach((item, i) => {
+    stocks.forEach((item, i) => {
       if (item.name.toLowerCase().includes(search.toLowerCase())) {
-        // if (token.id !== item.seller_id && item.buyer_id === null) {
-          arr.push(i);
-          totalHolder += 1;
-        // }
+        arr.push(i);
+        totalHolder += 1;
       }
     });
 
@@ -96,13 +97,13 @@ const AllItemsPage = (props) => {
 
     setTotalShown(totalHolder);
     if (!totalHolder) {
-      setError('No matching clocks');
+      setError('No matching stocks');
       return null;
     }
 
     setError(null);
     return ph.map((index) => {
-      const item = clocks[index];
+      const item = stocks[index];
       setLastIndex(index);
 
       return (<Clock token={token} item={item} key={item.id} newItem={addNewItem} />);
@@ -141,7 +142,7 @@ const AllItemsPage = (props) => {
           id="standard-full-width"
           label="Search"
           style={{ margin: 8 }}
-          helperText="Type the name of the clock"
+          helperText="Type the mineral name"
           fullWidth
           onChange={updateSearch}
           margin="normal"

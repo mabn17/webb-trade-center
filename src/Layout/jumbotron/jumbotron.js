@@ -18,6 +18,7 @@ const useStyles = (props, options) => {
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       boxShadow: 'none',
+      borderRadius: '100px'
     },
     overlay: {
       position: 'absolute',

@@ -7,11 +7,12 @@ import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   getToken,
-  decodeToken
-  /*,
-    hasAuth
-  */
+  decodeToken,
+  hasAuth
+
 } from '../../Helpers/Methods/TokenHandeler';
+
+import MyStocks from '../../mock/stocks.json';
 
 import Deposits from './balance';
 import Chart from './chart';
@@ -109,17 +110,23 @@ const MyAccount = (props) => {
   const classes = useStyles();
   const encoded = getToken();
   const [token, setToken] = React.useState({});
+  const [stocks, setStocks] = React.useState({});
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   React.useEffect(() => {
-    if (!encoded) props.history.push('/login');
+    if (!encoded) setToken({ exp: 1 });
     else setToken(decodeToken(encoded));
-  }, [encoded, props]);
+    hasAuth(token, props);
+
+    setStocks(MyStocks);
+  }, [encoded, props, token]);
 
   return (
     <Grid item xs={12} md={12} className={classes.cardGrid}>
-      <Typography component="h1" variant="h4" gutterBottom>
-        Hello there, { token.firstName ? token.firstName : token.email }!
+      <Typography component="h1" variant="h4" className="caps-dad" gutterBottom>
+        Hello there, <span className="caps">
+        { token.first_name ? token.first_name : token.email }
+      </span>!
       </Typography>
       <Divider />
       <Typography component="h2" variant="h5" gutterBottom className={classes.marginTop}>
@@ -138,11 +145,16 @@ const MyAccount = (props) => {
                 <Deposits token={token} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={12} lg={12}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
+            {
+              stocks.stocks ? stocks.stocks.map((stock) => (
+                <Grid item xs={12} md={12} lg={12}>
+                  <Paper className={fixedHeightPaper}>
+                    <Chart stock={stock} />
+                  </Paper>
+                </Grid>
+              )) :
+              null
+            }
           </Grid>
         </Container>
     </Grid>
