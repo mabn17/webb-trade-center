@@ -13,7 +13,6 @@ import {
   decodeToken
 } from '../../Helpers/Methods/TokenHandeler';
 
-import Items from '../../mock/allItems.json';
 import Clock from './item';
 
 import { getAllStocks } from '../../Helpers/Requests/stocks/stocks';
@@ -64,7 +63,6 @@ const AllItemsPage = (props) => {
   const [lastIndex, setLastIndex] = React.useState(0);
 
   React.useEffect(() => {
-    // setStocks(Items.items);
     getAllStocks().then(res => setStocks(res.items));
 
     if (!encoded) {
