@@ -29,7 +29,7 @@ const AboutPage = () => {
       .then(text => setMarkdown(text));
     
     emitMessage('Nu har jag fått min About.md');
-  });
+  }, []);
 
   React.useEffect(() => {
     socket.on('message', (msg) => {

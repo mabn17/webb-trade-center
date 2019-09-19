@@ -9,10 +9,12 @@ import {
   getToken,
   decodeToken,
   hasAuth
-
 } from '../../Helpers/Methods/TokenHandeler';
-
-import MyStocks from '../../mock/stocks.json';
+import {
+  getPersonalStocks,
+  getUpdatedInfo
+} from '../../Helpers/Requests/stocks/stocks';
+// import MyStocks from '../../mock/stocks.json';
 
 import Deposits from './balance';
 import Chart from './chart';
@@ -110,22 +112,44 @@ const MyAccount = (props) => {
   const classes = useStyles();
   const encoded = getToken();
   const [token, setToken] = React.useState({});
-  const [stocks, setStocks] = React.useState({});
+  const [stocks, setStocks] = React.useState({ stocks: [] });
+  const [updatedInfo, setUpdatedInfo] = React.useState({});
+  const [personalError, setPersonalError] = React.useState(null);
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const handleStocks = () => {
+    setPersonalError(null);
+    getPersonalStocks(encoded)
+      .then((res) => {
+        setStocks({ stocks: res });
+      })
+      .catch(() => setPersonalError('Problems loading your stocks'));
+  };
+
+  const handleGetUpdatedPersonalInfo = () => {
+    setUpdatedInfo({});
+    getUpdatedInfo(encoded)
+      .then((res) => {
+        setUpdatedInfo(res);
+      })
+      .catch((e) => console.log(e));
+  };
 
   React.useEffect(() => {
     if (!encoded) setToken({ exp: 1 });
     else setToken(decodeToken(encoded));
     hasAuth(token, props);
-
-    setStocks(MyStocks);
-  }, [encoded, props, token]);
+    
+    handleStocks();
+    handleGetUpdatedPersonalInfo();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [encoded, props]);
 
   return (
     <Grid item xs={12} md={12} className={classes.cardGrid}>
       <Typography component="h1" variant="h4" className="caps-dad" gutterBottom>
         Hello there, <span className="caps">
-        { token.first_name ? token.first_name : token.email }
+        { token.first_name ? token.first_name : '' }
       </span>!
       </Typography>
       <Divider />
@@ -137,17 +161,18 @@ const MyAccount = (props) => {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={classes.paper}>
-                <Orders />
+                <Orders items={stocks.stocks} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits token={token} />
+                <Deposits token={updatedInfo} />
               </Paper>
             </Grid>
+            { personalError }
             {
               stocks.stocks ? stocks.stocks.map((stock) => (
-                <Grid item xs={12} md={12} lg={12}>
+                <Grid item xs={12} md={12} lg={12} key={`paper-${stock.id}`}>
                   <Paper className={fixedHeightPaper}>
                     <Chart stock={stock} />
                   </Paper>

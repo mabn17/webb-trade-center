@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
+import { round } from '../../Helpers/Methods/FilterValues';
+
 const useStyles = makeStyles({
   depositContext: {
     flex: 1,
   },
+  top: {
+    marginTop: '10px',
+  }
 });
 
 
@@ -23,7 +28,7 @@ const Deposits = (props) => {
         Current Balance
       </Typography>
       <Typography component="p" variant="h4">
-        { props.token.assets } kr.
+        { props.token.assets ? `${round(props.token.assets)} kr.`  : '...' }
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
         on {formattedDate}

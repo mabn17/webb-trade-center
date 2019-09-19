@@ -9,3 +9,7 @@ export const objToLowerCase = (obj) => {
 
   return newObj;
 };
+
+export const round = (value, decimals=2) => {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
