@@ -14,7 +14,9 @@ import {
   getPersonalStocks,
   getUpdatedInfo
 } from '../../Helpers/Requests/stocks/stocks';
-// import MyStocks from '../../mock/stocks.json';
+import {
+  socket
+} from '../../Helpers/Sockets/Sockets';
 
 import Deposits from './balance';
 import Chart from './chart';
@@ -115,6 +117,7 @@ const MyAccount = (props) => {
   const [stocks, setStocks] = React.useState({ stocks: [] });
   const [updatedInfo, setUpdatedInfo] = React.useState({});
   const [personalError, setPersonalError] = React.useState(null);
+  const [socketIsTriggerd, setSocketIsTriggerd] = React.useState(false);
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const handleStocks = () => {
@@ -145,6 +148,14 @@ const MyAccount = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [encoded, props]);
 
+  React.useEffect(() => {
+    socket.on('stock update', (change) => {
+      console.log('New Prices! ', change);
+      setSocketIsTriggerd(!socketIsTriggerd);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Grid item xs={12} md={12} className={classes.cardGrid}>
       <Typography component="h1" variant="h4" className="caps-dad" gutterBottom>
@@ -174,7 +185,7 @@ const MyAccount = (props) => {
               stocks.stocks ? stocks.stocks.map((stock) => (
                 <Grid item xs={12} md={12} lg={12} key={`paper-${stock.id}`}>
                   <Paper className={fixedHeightPaper}>
-                    <Chart stock={stock} />
+                    <Chart hasUpdated={socketIsTriggerd} stock={stock} />
                   </Paper>
                 </Grid>
               )) :

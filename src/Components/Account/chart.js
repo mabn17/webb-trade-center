@@ -1,26 +1,57 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Typography from '@material-ui/core/Typography';
-
+import {
+  getStockHistory
+} from '../../Helpers/Requests/stocks/stocks';
 
 // Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
+// function createData(time, amount) {
+//   return { time, amount };
+// }
 
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', 2100),
-];
+// const data = [
+//   createData('00:00', 0),
+//   createData('03:00', 300),
+//   createData('06:00', 600),
+//   createData('09:00', 800),
+//   createData('12:00', 1500),
+//   createData('15:00', 2000),
+//   createData('18:00', 2400),
+//   createData('21:00', 2400),
+//   createData('24:00', 2100),
+// ];
 
 const Chart = (props) => {
+  const [data, setData] = React.useState([]);
+
+  const generateData = (stock) => {
+    return {
+      time: stock.when_time,
+      amount: stock.old_price
+    }
+  };
+
+  const handleChart = () => {
+    console.log('hej');
+    getStockHistory().then((items) => {
+      const holder = [];
+      if (typeof items === typeof ['j']) {
+        for (let index = 0; index < items.length; index++) {
+          const element = items[index];
+          if (element.item_name === props.stock.item_name) {
+            holder.push(generateData(element));
+          }
+        }
+      }
+  
+      setData(holder);
+    });
+  }
+  React.useEffect(() => {
+    handleChart();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.hasUpdated]);
   return (
     <>
       <Typography component="h2" variant="h6" gutterBottom>

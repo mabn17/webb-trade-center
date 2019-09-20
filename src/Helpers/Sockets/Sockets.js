@@ -7,7 +7,12 @@ function emitMessage(msg) {
   socket.emit('message', msg);
 }
 
+function emitStockChange(change) {
+  socket.emit('stock update', change);
+}
+
 export {
   socket,
-  emitMessage
+  emitMessage,
+  emitStockChange
 };

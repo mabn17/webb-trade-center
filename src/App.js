@@ -17,6 +17,7 @@ const FoFPage = lazy(() => import('./Components/FoF/FoF-Page'));
 const RegisterPage = lazy(() => import('./Components/Register/Register-Page'));
 const MyAccountPage = lazy(() => import('./Components/Account/My-Account-Page'));
 const LoginPage = lazy(() => import('./Components/Login/Login-Page'));
+const UpdatePage = lazy(() => import('./Components/Update/Update-Page'));
 
 
 const useStyles = makeStyles(theme => ({
@@ -37,8 +38,6 @@ const useStyles = makeStyles(theme => ({
 const App = () => {
   const [update, setUpdate] = React.useState(false);
   const classes = useStyles();
-
-  // Update <Header /> values from Route components
   const refresh = () => (setUpdate(!update));
 
 
@@ -59,6 +58,7 @@ const App = () => {
                   <Route exact path="/account" render={(props) => <MyAccountPage {...props} updateAll={refresh} />} />
                   <Route path="/login" render={(props) => <LoginPage {...props} updateAll={refresh} />} />
                   <Route path="/register" render={(props) => <RegisterPage {...props} updateAll={refresh} />} />
+                  <Route exact path="/update" render={() => <UpdatePage />} />
                   <Route exact path="**" render={() => <FoFPage />} />
                 </Switch>
               </Grid>
