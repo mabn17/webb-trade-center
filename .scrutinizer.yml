@@ -1,6 +1,5 @@
 filter:
-  excluded_paths:
-    [selenium/*]
+  excluded_paths: [selenium/*]
 
 build:
   nodes:
