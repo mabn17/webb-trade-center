@@ -186,7 +186,7 @@ const MyAccount = (props) => {
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits token={updatedInfo} />
+                <Deposits token={updatedInfo} stocks={stocks.stocks} />
               </Paper>
             </Grid>
             { personalError }
