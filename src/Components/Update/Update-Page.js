@@ -5,24 +5,23 @@ import {
 } from '../../Helpers/Sockets/Sockets';
 
 
-const AboutPage = () => {
-  const [message, setMessage] = React.useState('...');
+const UpdatePage = () => {
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
     if (isLoading) {
-      emitStockChange('Nu har jag fått min About.md');
+      emitStockChange('.');
       updateAllStocks()
-        .then(() => setMessage('Stocks Updated'))
-        .catch(() => setMessage('Something went wrong, try again'));
-      console.log('Updated');
+        .then()
+        .catch();
     }
     setIsLoading(false);
-  }, [isLoading]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <h1>{ message }</h1>
+    <h1> Updated stocks </h1>
   );
 };
 
-export default AboutPage;
+export default UpdatePage;

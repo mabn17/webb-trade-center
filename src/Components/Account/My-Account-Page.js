@@ -117,14 +117,18 @@ const MyAccount = (props) => {
   const [stocks, setStocks] = React.useState({ stocks: [] });
   const [updatedInfo, setUpdatedInfo] = React.useState({});
   const [personalError, setPersonalError] = React.useState(null);
-  const [socketIsTriggerd, setSocketIsTriggerd] = React.useState(false);
+  const [socketIsTriggerd, setSocketIsTriggerd] = React.useState(0);
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const [nowItem, setNowItem] = React.useState([]);
 
   const handleStocks = () => {
     setPersonalError(null);
     getPersonalStocks(encoded)
       .then((res) => {
         setStocks({ stocks: res });
+        setNowItem(res);
+      }).then(() => {
+        setSocketIsTriggerd(!socketIsTriggerd);
       })
       .catch(() => setPersonalError('Problems loading your stocks'));
   };
@@ -142,19 +146,24 @@ const MyAccount = (props) => {
     if (!encoded) setToken({ exp: 1 });
     else setToken(decodeToken(encoded));
     hasAuth(token, props);
-    
+
     handleStocks();
     handleGetUpdatedPersonalInfo();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [encoded, props]);
 
-  React.useEffect(() => {
+  const handleUpdate = () => {
     socket.on('stock update', (change) => {
-      console.log('New Prices! ', change);
-      setSocketIsTriggerd(!socketIsTriggerd);
+      handleStocks();
+      handleGetUpdatedPersonalInfo();
+      setSocketIsTriggerd((st) => st += 1);
     });
+  }
+
+  React.useEffect(() => {
+    handleUpdate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [stocks]);
 
   return (
     <Grid item xs={12} md={12} className={classes.cardGrid}>
@@ -185,7 +194,7 @@ const MyAccount = (props) => {
               stocks.stocks ? stocks.stocks.map((stock) => (
                 <Grid item xs={12} md={12} lg={12} key={`paper-${stock.id}`}>
                   <Paper className={fixedHeightPaper}>
-                    <Chart hasUpdated={socketIsTriggerd} stock={stock} />
+                    <Chart mhm={nowItem} hasUpdated={socketIsTriggerd} stock={stock} />
                   </Paper>
                 </Grid>
               )) :

@@ -33,7 +33,7 @@ A frontend for [JsRamverk](https://jsramverk.me) project at BTH.
 ***/\*\**** - Catching unknown routes with an error message.  
 
 ###### Thanks
-This website was made with material-ui and material-icons
+This website was made with recharts, markdown-to-jsx, material-ui and material-icons
 
 #### TODO: 
 1. Make it possible to add balance to the user (maybe add some kind of account manageing / better personal page)
