@@ -50,10 +50,13 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
       "!src/index.js",
+      "!src/App.js",
       "!src/Components/Items/item.js",
       "!src/Helpers/Markdown/markdown.js",
       "!src/serviceWorker.js",
-      "!src/Components/Cart/Shopping-Cart.js"
+      "!src/Components/Cart/Shopping-Cart.js",
+      "!src/Components/Account/chart.js",
+      "!src/Components/Register/Register-Page.js"
     ]
   }
 }
