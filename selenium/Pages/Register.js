@@ -56,6 +56,12 @@ test.describe("Register-Page", function() {
     });
   }
 
+  function fillFirstAndLast() {
+    nameAndAction('firstName', 'fill', 'testFirst');
+    nameAndAction('lastName', 'fill', 'testLast');
+    nameAndAction('agree');
+  }
+
   test.it("Checks Sign-Up Navigation and if it renders propperly.", function(done) {
     goToNavLink("register");
     matchUrl('register');    
@@ -65,59 +71,64 @@ test.describe("Register-Page", function() {
 
   test.it("Trys wrong input values (PASSWORD 1) and compares them to error messages", function(done) {
     goToNavLink("register");
-
+    fillFirstAndLast();
+    nameAndAction('email', 'fill', 'email@email.com')
     nameAndAction('register');
-    assertTitle('Password has to be atleast 4 characters long.', 'h1');
+    assertTitle('Password needs to be atleast 4 characters long', 'h1');
 
     done();
   });
   
 
-  test.it("Trys wrong input values (PASSWORD 2) and compares them to error messages", function(done) {
+  test.it("Trys wrong input values (firstname 1) and compares them to error messages", function(done) {
     goToNavLink("register");
-
+    nameAndAction('email', 'fill', 'email@email.com')
     nameAndAction('password', 'fill', 'pass');
-    nameAndAction('passwordTwo', 'fill', 'passa');
     nameAndAction('register');
-    assertTitle('Passwords does not match.', 'h1');
+
+    assertTitle('No firstname selected', 'h1');
 
     done();
   });
 
   test.it("Trys wrong input values (EMAIL 1) and compares them to error messages", function(done) {
     goToNavLink("register");
-
+    fillFirstAndLast();
     nameAndAction('password', 'fill', 'pass');
-    nameAndAction('passwordTwo', 'fill', 'pass');
     nameAndAction('email', 'fill', 'email');
     
-    nameAndAction('register');
-    assertTitle('Invalid email address.', 'h1');
-
-    done();
+    setTimeout(() => {
+      nameAndAction('register');
+      assertTitle('Invalid email address.', 'h1');
+      done();
+    }, 1300);
   });
 
   test.it("Trys wrong input values (EMAIL 2) and compares them to error messages", function(done) {
     goToNavLink("register");
 
     nameAndAction('password', 'fill', 'pass');
-    nameAndAction('passwordTwo', 'fill', 'pass');
+    fillFirstAndLast();
     nameAndAction('email', 'fill', 'email@email');
 
-    nameAndAction('register');
-    assertTitle('Invalid email address.', 'h1');
-    done();
+    setTimeout(() => {
+      nameAndAction('register');
+      assertTitle('Invalid email address.', 'h1');
+      done();
+    }, 1300);
   });
 
   test.it("Trys correct input values and compares them to server-error messages", function(done) {
     goToNavLink("register");
 
+    fillFirstAndLast();
     nameAndAction('password', 'fill', 'pass');
-    nameAndAction('passwordTwo', 'fill', 'pass');
     nameAndAction('email', 'fill', 'email@email.com');
 
-    nameAndAction('register');
-    assertTitle('Could not reach the server', 'h1');
-    done();
+    setTimeout(() => {
+      nameAndAction('register');
+      assertTitle('Could not reach the server', 'h1');
+      done();
+    }, 1700);
   });
 });

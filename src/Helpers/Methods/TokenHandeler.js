@@ -15,6 +15,7 @@ export const hasError = (value) => {
 
 export const hasAuth = (token, props) => {
   if (!token) token = { exp: 1 };
+
   if (token.exp < (new Date() / 1000)) {
     removeToken();
     props.updateAll();

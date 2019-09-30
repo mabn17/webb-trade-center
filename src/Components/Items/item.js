@@ -32,7 +32,9 @@ const useStyles = makeStyles(_theme => ({
 }));
 
 const Item = (props) => {
+  // const encoded = getToken();
   const [hasBeenClicked, setHasBeenClicked] = React.useState(false);
+  // const [updatedInfo, setUpdatedInfo] = React.useState({});
   const classes = useStyles();
 
   const handleAddItem = () => {
@@ -40,6 +42,20 @@ const Item = (props) => {
     addItem(props.item);
     props.newItem();
   }
+
+  // const handleGetUpdatedPersonalInfo = () => {
+  //   setUpdatedInfo({});
+  //   getUpdatedInfo(encoded)
+  //     .then((res) => {
+  //       if(typeof res === typeof ' ') {
+  //         setUpdatedInfo({ id: 0, assets: 0,  });
+  //         return;
+  //       }
+
+  //       setUpdatedInfo(res);
+  //     })
+  //     .catch((e) => console.log(e));
+  // };
 
 
   return (
@@ -62,7 +78,7 @@ const Item = (props) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Link to={`/clocks/${props.item.name}`} className={classes.link}>
+          <Link to={`/stocks/${props.item.name}`} className={classes.link}>
             <Button size="small" color="primary">
               View
             </Button>

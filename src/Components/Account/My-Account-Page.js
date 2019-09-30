@@ -125,6 +125,10 @@ const MyAccount = (props) => {
     setPersonalError(null);
     getPersonalStocks(encoded)
       .then((res) => {
+        if(typeof res === typeof ' ') {
+          setPersonalError(res);
+          return;
+        }
         setStocks({ stocks: res });
         setNowItem(res);
       }).then(() => {
@@ -143,10 +147,12 @@ const MyAccount = (props) => {
   };
 
   React.useEffect(() => {
-    if (!encoded) setToken({ exp: 1 });
-    else setToken(decodeToken(encoded));
-    hasAuth(token, props);
-
+    if(!encoded) {
+      hasAuth(null, props);
+      return;
+    }
+    
+    setToken(decodeToken(encoded));
     handleStocks();
     handleGetUpdatedPersonalInfo();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -181,12 +187,20 @@ const MyAccount = (props) => {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={classes.paper}>
-                <Orders items={stocks.stocks} />
+                <Orders
+                  items={stocks.stocks}
+                  getNewInfo={handleStocks}
+                  updatePersonal={handleGetUpdatedPersonalInfo}
+                />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits token={updatedInfo} stocks={stocks.stocks} />
+                <Deposits
+                  token={updatedInfo}
+                  stocks={stocks.stocks}
+                  update={handleGetUpdatedPersonalInfo}
+                />
               </Paper>
             </Grid>
             { personalError }

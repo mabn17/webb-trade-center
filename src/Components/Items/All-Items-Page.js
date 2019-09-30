@@ -9,9 +9,11 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCart from '../Cart/Shopping-Cart';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  getToken,
-  decodeToken
+  getToken
 } from '../../Helpers/Methods/TokenHandeler';
+import {
+  getUpdatedInfo
+} from '../../Helpers/Requests/stocks/stocks';
 
 import Clock from './item';
 
@@ -68,9 +70,24 @@ const AllItemsPage = (props) => {
     if (!encoded) {
       setToken({ id: 0, assets: 0, email: '' });
     } else {
-      setToken(decodeToken(encoded));
+      handleGetUpdatedPersonalInfo();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [encoded, props]);
+
+  const handleGetUpdatedPersonalInfo = () => {
+    setToken({});
+    getUpdatedInfo(encoded)
+      .then((res) => {
+        if(typeof res === typeof ' ') {
+          setToken({ id: 0, assets: 0,  });
+          return;
+        }
+
+        setToken(res);
+      })
+      .catch((e) => console.log(e));
+  };
 
   const updateSearch = (e) => {
     setSearch(e.target.value);
@@ -81,31 +98,35 @@ const AllItemsPage = (props) => {
     let arr = [];
     let totalHolder = 0;
 
-    stocks.forEach((item, i) => {
-      if (item.name.toLowerCase().includes(search.toLowerCase())) {
-        arr.push(i);
-        totalHolder += 1;
+    if (stocks) {
+      stocks.forEach((item, i) => {
+        if (item.name.toLowerCase().includes(search.toLowerCase())) {
+          arr.push(i);
+          totalHolder += 1;
+        }
+      });
+  
+      const first = (page * rowsPerPage || 0);
+      const second = ((page * 4) + rowsPerPage);
+  
+      const ph = arr.slice(first, second);
+  
+      setTotalShown(totalHolder);
+      if (!totalHolder) {
+        setError('No matching stocks');
+        return null;
       }
-    });
-
-    const first = (page * rowsPerPage || 0);
-    const second = ((page * 4) + rowsPerPage);
-
-    const ph = arr.slice(first, second);
-
-    setTotalShown(totalHolder);
-    if (!totalHolder) {
-      setError('No matching stocks');
-      return null;
+  
+      setError(null);
+      return ph.map((index) => {
+        const item = stocks[index];
+        setLastIndex(index);
+  
+        return (<Clock token={token} item={item} key={item.id} newItem={addNewItem} />);
+      });
     }
-
-    setError(null);
-    return ph.map((index) => {
-      const item = stocks[index];
-      setLastIndex(index);
-
-      return (<Clock token={token} item={item} key={item.id} newItem={addNewItem} />);
-    });
+    setError('Problem fetching items..');
+    return null;
   }
 
   const RenderPagination = () => (

@@ -14,6 +14,10 @@ const NavConfig = {
       name: 'My Account',
       url: '/account'
     },
+    {
+      name: 'Shop',
+      url: '/stocks'
+    }
   ],
   buttons: {
     Sign: {

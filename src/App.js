@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './Layout/header/Header';
 import Footer from './Layout/footer/Footer';
@@ -45,7 +45,7 @@ const App = () => {
     <React.Fragment>
     <CssBaseline />
     <React.Suspense fallback={<h1>Loading ...</h1>} className={classes.centerLoading}>
-      <BrowserRouter>
+      <Router>
           <Container maxWidth="lg">
             <Header updateAll={update} />
             <main className={classes.root}>
@@ -54,7 +54,7 @@ const App = () => {
                   <Route exact path="/" render={() => <HomePage />} />
                   <Route exact path="/about" render={() => <AboutPage />} />
                   <Route exact path="/stocks" render={() => <AllItemsPage />} />
-                  <Route exact path="/stocks/:name" render={() => <SpesificItemPage />} />
+                  <Route exact path="/stocks/:name" render={(props) => <SpesificItemPage {...props} />} />
                   <Route exact path="/account" render={(props) => <MyAccountPage {...props} updateAll={refresh} />} />
                   <Route path="/login" render={(props) => <LoginPage {...props} updateAll={refresh} />} />
                   <Route path="/register" render={(props) => <RegisterPage {...props} updateAll={refresh} />} />
@@ -64,7 +64,7 @@ const App = () => {
               </Grid>
             </main>
           </Container>
-        </BrowserRouter>
+        </Router>
       </React.Suspense>
       <Footer />
     </React.Fragment>

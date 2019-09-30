@@ -9,6 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import CloseIcon from '@material-ui/icons/Close';
@@ -23,6 +24,8 @@ import {
   addItem,
   removeItems
 } from '../../Helpers/Methods/ShoppingItems';
+import { execBuyStocks } from '../../Helpers/Requests/stocks/stocks';
+import { getToken } from '../../Helpers/Methods/TokenHandeler';
 
 function countArray(arr, what) {
   let count = 0;
@@ -72,6 +75,10 @@ const useStyles = makeStyles(theme => ({
     margin: '10px 20px',
     border: `1px solid ${theme.palette.divider}`,
     backgroundColor: 'rgba(255, 26, 66, 0.1)'
+  },
+  link: {
+    margin: '5px',
+    textDecorationColor: 'red',
   }
 }));
 
@@ -81,6 +88,8 @@ const ShoppingCart = (props) => {
   const [shopItems, setShopItems] = React.useState(getItems());
   const [open, setOpen] = React.useState(false);
   const [disabled, setDisabled] = React.useState(true);
+  const [message, setMessage] = React.useState(null);
+  const [messageTwo, setMessageTwo] = React.useState('');
 
   React.useEffect(() => {
     setShopItems(getItems());
@@ -89,6 +98,7 @@ const ShoppingCart = (props) => {
   const handleRemoveItem = (item) => {
     removeItem(item);
     props.updateAll();
+    setMessageTwo('');
 
     return null;
   };
@@ -112,6 +122,13 @@ const ShoppingCart = (props) => {
     }
 
     setDisabled(false);
+    setMessage(null);
+
+    if (token.id === 0) {
+      setDisabled(true);
+      setMessage('Login to continue');
+    }
+
     let keyId = 0;
     let arrId = [];
     
@@ -156,6 +173,46 @@ const ShoppingCart = (props) => {
     setOpen(false);
   }
 
+  const handleCheckout = () => {
+    let holder = [];
+    let real = [];
+    let total = 0;
+    setDisabled(true);
+
+    shopItems.items.forEach((item) => {
+      if (holder.indexOf(item.id) === -1) {
+        const accurences = countArray(shopItems.items, item.id);
+        holder.push(item.id);
+        real.push({ stockToBuy: item.name, amountToBuy: accurences });
+        total += (item.price * accurences);
+      }
+    });
+
+
+    if (token.id === 0) {
+      console.log('noo');
+      return;
+    }
+
+    console.log(total > token.assets);
+
+    setMessageTwo('');
+    if(total > token.assets) {
+      setMessageTwo('Not enought assets to buy your stocks');
+      return;
+    }
+
+    // buyStocks()
+    // if negative abort
+    // else sell stocks and update token.assets med parrent hook?
+    real.forEach(stock => {
+      execBuyStocks(getToken(), stock).catch(e => console.log(e));
+    });
+
+    handleRemoveAll();
+    return;
+  }
+
   const CartDialog = () => (
     <Dialog disableBackdropClick fullScreen open={open} onClose={handleClose} transitionDuration={0}>
       <AppBar className={`${classes.appBar} ${classes.gradient}`}>
@@ -166,13 +223,19 @@ const ShoppingCart = (props) => {
           <Typography variant="h6" className={classes.title}>
             Shopping Cart
           </Typography>
-          <Button color="inherit" onClick={handleClose} disabled={disabled}>
+          <Button color="inherit" onClick={handleCheckout} disabled={disabled}>
             checkout
           </Button>
         </Toolbar>
       </AppBar>
       <List>
         <DisplayItems />
+        { message ? (<ListItem><Link to="/login" className={classes.link}>
+        <span className={`${classes.warning} ${classes.right}`}>{message}</span>
+      </Link></ListItem>) : null }
+      <ListItem>
+        <span className={classes.warning} >{ messageTwo }</span>
+      </ListItem>
       </List>
       <Typography component={'span'} variant={'body2'} className={classes.right} >
         { shopItems.items.length === 0 ? <b>No items in cart</b> : <RenderBalance /> }
