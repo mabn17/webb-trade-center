@@ -60,7 +60,7 @@ test.describe("About-Page", function() {
 
   test.it("Checks if the markdown file has renderd propperly", function(done) {
     goToNavLink("About us");
-    this.timeout(20000);
+    this.timeout(25000);
     hasLink('Frontend');
     hasLink('Backend');
     assertTitle('Webb Trade Center', 'h6');

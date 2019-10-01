@@ -57,8 +57,8 @@ test.describe("Login-Page", function() {
 
   test.it("Checks Sign-In Navigation and if it renders propperly.", function(done) {
     goToNavLink("login");
-    matchUrl('login');    
-
+    this.timeout(20000);
+    matchUrl('login');
     done();
   });
 
@@ -66,7 +66,9 @@ test.describe("Login-Page", function() {
     goToNavLink("login");
 
     nameAndAction('email', 'fill', 'email@email.com');
+    this.timeout(10000);
     nameAndAction('password', 'fill', 'p');
+    this.timeout(10000);
     nameAndAction('login');
     this.timeout(20000);
     assertTitle('Password has to be atleast 4 characters long.', 'h1');
@@ -76,10 +78,11 @@ test.describe("Login-Page", function() {
 
   test.it("Trys wrong input values (EMAIL 1) and compares them to error messages", function(done) {
     goToNavLink("login");
-
+    this.timeout(20000);
     nameAndAction('password', 'fill', 'pass');
+    this.timeout(10000);
     nameAndAction('email', 'fill', 'email');
-    
+    this.timeout(10000);
     nameAndAction('login');
     this.timeout(20000);
     assertTitle('Invalid email address.', 'h1');
@@ -89,10 +92,11 @@ test.describe("Login-Page", function() {
 
   test.it("Trys wrong input values (EMAIL 2) and compares them to error messages", function(done) {
     goToNavLink("login");
-
+    this.timeout(20000);
     nameAndAction('password', 'fill', 'pass');
+    this.timeout(10000);
     nameAndAction('email', 'fill', 'email@email');
-
+    this.timeout(10000);
     nameAndAction('login');
     this.timeout(20000);
     assertTitle('Invalid email address.', 'h1');
@@ -101,10 +105,11 @@ test.describe("Login-Page", function() {
 
   test.it("Trys correct input values and compares them to server-error messages", function(done) {
     goToNavLink("login");
-
+    this.timeout(20000);
     nameAndAction('password', 'fill', 'pass');
+    this.timeout(10000);
     nameAndAction('email', 'fill', 'email@email.com');
-
+    this.timeout(10000);
     nameAndAction('login');
     this.timeout(20000);
     assertTitle('Could not reach the server', 'h1');

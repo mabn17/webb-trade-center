@@ -56,9 +56,11 @@ test.describe("Register-Page", function() {
     });
   }
 
-  function fillFirstAndLast() {
+  function fillFirstAndLast(callback) {
     nameAndAction('firstName', 'fill', 'testFirst');
+    callback();
     nameAndAction('lastName', 'fill', 'testLast');
+    callback();
     nameAndAction('agree');
   }
 
@@ -70,8 +72,13 @@ test.describe("Register-Page", function() {
   });
 
   test.it("Trys wrong input values (PASSWORD 1) and compares them to error messages", function(done) {
+    const that = this;
+    const callback = () => {
+      that.timeout(10000);
+    };
+
     goToNavLink("register");
-    fillFirstAndLast();
+    fillFirstAndLast(callback);
     nameAndAction('email', 'fill', 'email@email.com')
     nameAndAction('register');
     assertTitle('Password needs to be atleast 4 characters long', 'h1');
@@ -92,24 +99,34 @@ test.describe("Register-Page", function() {
   });
 
   test.it("Trys wrong input values (EMAIL 1) and compares them to error messages", function(done) {
+    const that = this;
+    const callback = () => {
+      that.timeout(10000);
+    };
+
     goToNavLink("register");
-    fillFirstAndLast();
+    fillFirstAndLast(callback);
     nameAndAction('password', 'fill', 'pass');
+    this.timeout(10000);
     nameAndAction('email', 'fill', 'email');
     this.timeout(10000);
     nameAndAction('register');
-    this.timeout(10000);
+    this.timeout(20000);
     assertTitle('Invalid email address.', 'h1');
     done();
   });
 
   test.it("Trys wrong input values (EMAIL 2) and compares them to error messages", function(done) {
+    const that = this;
+    const callback = () => {
+      that.timeout(10000);
+    };
+
     goToNavLink("register");
-
+    this.timeout(10000);
     nameAndAction('password', 'fill', 'pass');
-    fillFirstAndLast();
+    fillFirstAndLast(callback);
     nameAndAction('email', 'fill', 'email@email');
-
     this.timeout(10000);
     nameAndAction('register');
     this.timeout(10000);
@@ -118,10 +135,16 @@ test.describe("Register-Page", function() {
   });
 
   test.it("Trys correct input values and compares them to server-error messages", function(done) {
-    goToNavLink("register");
+    const that = this;
+    const callback = () => {
+      that.timeout(10000);
+    };
 
-    fillFirstAndLast();
+    goToNavLink("register");
+    this.timeout(10000);
+    fillFirstAndLast(callback);
     nameAndAction('password', 'fill', 'pass');
+    this.timeout(10000);
     nameAndAction('email', 'fill', 'email@email.com');
     this.timeout(10000);
     nameAndAction('register');
