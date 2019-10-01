@@ -53,17 +53,14 @@ test.describe("About-Page", function() {
 
   test.it("Checks Navigation to About", function(done) {
     goToNavLink("About us");
+    this.timeout(20000);
     matchUrl('about');
-    hasLink('Frontend');
-    hasLink('Backend');
-
     done();
   });
 
   test.it("Checks if the markdown file has renderd propperly", function(done) {
     goToNavLink("About us");
-    matchUrl('about');
-
+    this.timeout(20000);
     hasLink('Frontend');
     hasLink('Backend');
     assertTitle('Webb Trade Center', 'h6');

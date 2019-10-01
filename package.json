@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha --timeout 15000 ./selenium/**/*.js",
+    "test": "mocha --timeout 25000 ./selenium/**/*.js",
     "test:ci": "react-scripts test --env=jsdom --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },

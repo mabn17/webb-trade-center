@@ -38,14 +38,17 @@ test.describe("Index-Page", function() {
   }
 
   test.it("Checks Home Navigation and if it renders propperly.", function(done) {
+    this.timeout(1500);
     matchUrl('/');
     goToNavLink("Home");
+    this.timeout(1000);
     matchUrl('/');    
 
     done();
   });
 
   test.it("Checks the value of page title.", function(done) {
+    this.timeout(1000);
     browser.getTitle().then(function(title) {
       assert.equal(title, 'WTC | Martinborg.me');
     });

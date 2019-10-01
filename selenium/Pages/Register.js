@@ -96,12 +96,11 @@ test.describe("Register-Page", function() {
     fillFirstAndLast();
     nameAndAction('password', 'fill', 'pass');
     nameAndAction('email', 'fill', 'email');
-    
-    setTimeout(() => {
-      nameAndAction('register');
-      assertTitle('Invalid email address.', 'h1');
-      done();
-    }, 1300);
+    this.timeout(10000);
+    nameAndAction('register');
+    this.timeout(10000);
+    assertTitle('Invalid email address.', 'h1');
+    done();
   });
 
   test.it("Trys wrong input values (EMAIL 2) and compares them to error messages", function(done) {
@@ -111,11 +110,11 @@ test.describe("Register-Page", function() {
     fillFirstAndLast();
     nameAndAction('email', 'fill', 'email@email');
 
-    setTimeout(() => {
-      nameAndAction('register');
-      assertTitle('Invalid email address.', 'h1');
-      done();
-    }, 1300);
+    this.timeout(10000);
+    nameAndAction('register');
+    this.timeout(10000);
+    assertTitle('Invalid email address.', 'h1');
+    done();
   });
 
   test.it("Trys correct input values and compares them to server-error messages", function(done) {
@@ -124,11 +123,10 @@ test.describe("Register-Page", function() {
     fillFirstAndLast();
     nameAndAction('password', 'fill', 'pass');
     nameAndAction('email', 'fill', 'email@email.com');
-
-    setTimeout(() => {
-      nameAndAction('register');
-      assertTitle('Could not reach the server', 'h1');
-      done();
-    }, 1700);
+    this.timeout(10000);
+    nameAndAction('register');
+    this.timeout(10000);
+    assertTitle('Could not reach the server', 'h1');
+    done();
   });
 });

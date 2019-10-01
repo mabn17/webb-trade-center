@@ -68,6 +68,7 @@ test.describe("Login-Page", function() {
     nameAndAction('email', 'fill', 'email@email.com');
     nameAndAction('password', 'fill', 'p');
     nameAndAction('login');
+    this.timeout(20000);
     assertTitle('Password has to be atleast 4 characters long.', 'h1');
 
     done();
@@ -80,6 +81,7 @@ test.describe("Login-Page", function() {
     nameAndAction('email', 'fill', 'email');
     
     nameAndAction('login');
+    this.timeout(20000);
     assertTitle('Invalid email address.', 'h1');
 
     done();
@@ -92,6 +94,7 @@ test.describe("Login-Page", function() {
     nameAndAction('email', 'fill', 'email@email');
 
     nameAndAction('login');
+    this.timeout(20000);
     assertTitle('Invalid email address.', 'h1');
     done();
   });
@@ -103,6 +106,7 @@ test.describe("Login-Page", function() {
     nameAndAction('email', 'fill', 'email@email.com');
 
     nameAndAction('login');
+    this.timeout(20000);
     assertTitle('Could not reach the server', 'h1');
     done();
   });

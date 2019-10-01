@@ -30,7 +30,12 @@ test.describe("MyAccount-Page", function() {
   }
 
   test.it("Should be redirected to login", function(done) {
-
+    browser.wait(() => {
+      return browser.executeScript('return document.readyState').then((state) => {
+        return state === 'complete';
+      });
+    });
+    this.timeout(25000);
     matchUrl('login');
     done();
   });
