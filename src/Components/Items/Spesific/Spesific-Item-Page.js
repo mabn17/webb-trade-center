@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const CurrentItem = (props) => {
   const [product, setProduct] = React.useState('Loading ..');
-  console.log(props);
   React.useEffect(() => {
     handleGetCurrentItem();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -11,7 +10,7 @@ const CurrentItem = (props) => {
 
 
   const handleGetCurrentItem = () => {
-    setProduct('hej' + props.match.params.name);
+    setProduct('hej' + props.match.params.name || '');
   }
 
   return (

@@ -23,7 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "mocha --timeout 25000 ./selenium/**/*.js",
-    "test:ci": "react-scripts test --env=jsdom --coverage --watchAll=false",
+    "test:ci": "react-scripts test --silent --env=jsdom --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,6 +42,9 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^9.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "eslint-utils": "^1.4.1",
     "http-server": "^0.11.1",
     "mocha": "^6.2.0",

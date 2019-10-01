@@ -18,3 +18,4 @@ it('My-Account Page renders without crashing', () => {
   );
   ReactDOM.unmountComponentAtNode(div);
 });
+
