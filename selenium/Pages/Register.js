@@ -9,7 +9,7 @@ const By = webdriver.By;
 
 let browser;
 
-const timeoutOne = 40000;
+const timeoutOne = 35000;
 const timeoutTwo = 35000;
 
 test.describe("Register-Page", function() {
