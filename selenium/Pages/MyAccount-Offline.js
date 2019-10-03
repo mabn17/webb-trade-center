@@ -37,7 +37,7 @@ test.describe("MyAccount-Page", function() {
         return state === 'complete';
       });
     });
-    this.timeout(timeoutOne);
+    this.timeout(timeoutOne + 15000);
     matchUrl('login');
     done();
   });

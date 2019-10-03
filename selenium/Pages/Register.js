@@ -9,8 +9,8 @@ const By = webdriver.By;
 
 let browser;
 
-const timeoutOne = 35000;
-const timeoutTwo = 35000;
+const timeoutOne = 40000;
+const timeoutTwo = 45000;
 
 test.describe("Register-Page", function() {
   test.beforeEach(function(done) {
