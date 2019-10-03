@@ -9,9 +9,12 @@ const By = webdriver.By;
 
 let browser;
 
+const timeoutOne = 35000;
+// const timeoutTwo = 30000;
+
 test.describe("Index-Page", function() {
   test.beforeEach(function(done) {
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     browser = new webdriver.Builder()
       .withCapabilities(webdriver.Capabilities.firefox()).build();
 
@@ -38,17 +41,17 @@ test.describe("Index-Page", function() {
   }
 
   test.it("Checks Home Navigation and if it renders propperly.", function(done) {
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     matchUrl('/');
     goToNavLink("Home");
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     matchUrl('/');    
 
     done();
   });
 
   test.it("Checks the value of page title.", function(done) {
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     browser.getTitle().then(function(title) {
       assert.equal(title, 'WTC | Martinborg.me');
     });

@@ -9,9 +9,12 @@ const By = webdriver.By;
 
 let browser;
 
+const timeoutOne = 45000;
+const timeoutTwo = 30000;
+
 test.describe("Login-Page", function() {
   test.beforeEach(function(done) {
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     browser = new webdriver.Builder()
       .withCapabilities(webdriver.Capabilities.firefox()).build();
 
@@ -57,7 +60,7 @@ test.describe("Login-Page", function() {
 
   test.it("Checks Sign-In Navigation and if it renders propperly.", function(done) {
     goToNavLink("login");
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     matchUrl('login');
     done();
   });
@@ -66,11 +69,11 @@ test.describe("Login-Page", function() {
     goToNavLink("login");
 
     nameAndAction('email', 'fill', 'email@email.com');
-    this.timeout(10000);
+    this.timeout(timeoutTwo);
     nameAndAction('password', 'fill', 'p');
-    this.timeout(10000);
+    this.timeout(timeoutTwo);
     nameAndAction('login');
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     assertTitle('Password has to be atleast 4 characters long.', 'h1');
 
     done();
@@ -78,13 +81,13 @@ test.describe("Login-Page", function() {
 
   test.it("Trys wrong input values (EMAIL 1) and compares them to error messages", function(done) {
     goToNavLink("login");
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     nameAndAction('password', 'fill', 'pass');
-    this.timeout(10000);
+    this.timeout(timeoutTwo);
     nameAndAction('email', 'fill', 'email');
-    this.timeout(10000);
+    this.timeout(timeoutTwo);
     nameAndAction('login');
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     assertTitle('Invalid email address.', 'h1');
 
     done();
@@ -92,26 +95,26 @@ test.describe("Login-Page", function() {
 
   test.it("Trys wrong input values (EMAIL 2) and compares them to error messages", function(done) {
     goToNavLink("login");
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     nameAndAction('password', 'fill', 'pass');
-    this.timeout(10000);
+    this.timeout(timeoutTwo);
     nameAndAction('email', 'fill', 'email@email');
-    this.timeout(10000);
+    this.timeout(timeoutTwo);
     nameAndAction('login');
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     assertTitle('Invalid email address.', 'h1');
     done();
   });
 
   test.it("Trys correct input values and compares them to server-error messages", function(done) {
     goToNavLink("login");
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     nameAndAction('password', 'fill', 'pass');
-    this.timeout(10000);
+    this.timeout(timeoutTwo);
     nameAndAction('email', 'fill', 'email@email.com');
-    this.timeout(10000);
+    this.timeout(timeoutTwo);
     nameAndAction('login');
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     assertTitle('Could not reach the server', 'h1');
     done();
   });

@@ -8,9 +8,12 @@ const webdriver = require("selenium-webdriver");
 
 let browser;
 
+const timeoutOne = 35000;
+const timeoutTwo = 40000;
+
 test.describe("MyAccount-Page", function() {
   test.beforeEach(function(done) {
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     browser = new webdriver.Builder()
       .withCapabilities(webdriver.Capabilities.firefox()).build();
 
@@ -35,7 +38,7 @@ test.describe("MyAccount-Page", function() {
         return state === 'complete';
       });
     });
-    this.timeout(25000);
+    this.timeout(timeoutTwo);
     matchUrl('login');
     done();
   });

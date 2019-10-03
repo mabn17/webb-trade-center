@@ -8,10 +8,12 @@ const webdriver = require("selenium-webdriver");
 const By = webdriver.By;
 
 let browser;
+const timeoutOne = 100000;
+const timeoutTwo = 30000;
 
 test.describe("About-Page", function() {
   test.beforeEach(function(done) {
-    this.timeout(20000);
+    this.timeout(timeoutOne);
     browser = new webdriver.Builder()
       .withCapabilities(webdriver.Capabilities.firefox()).build();
 
@@ -52,15 +54,25 @@ test.describe("About-Page", function() {
   }
 
   test.it("Checks Navigation to About", function(done) {
+    browser.wait(() => {
+      return browser.executeScript('return document.readyState').then((state) => {
+        return state === 'complete';
+      });
+    });
     goToNavLink("About us");
-    this.timeout(20000);
+    this.timeout(timeoutTwo);
     matchUrl('about');
     done();
   });
 
   test.it("Checks if the markdown file has renderd propperly", function(done) {
+    browser.wait(() => {
+      return browser.executeScript('return document.readyState').then((state) => {
+        return state === 'complete';
+      });
+    });
     goToNavLink("About us");
-    this.timeout(25000);
+    this.timeout(timeoutTwo);
     hasLink('Frontend');
     hasLink('Backend');
     assertTitle('Webb Trade Center', 'h6');

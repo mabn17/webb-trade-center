@@ -60,7 +60,9 @@
       "!src/serviceWorker.js",
       "!src/Components/Cart/Shopping-Cart.js",
       "!src/Components/Account/chart.js",
-      "!src/Components/Register/Register-Page.js"
+      "!src/Components/Register/Register-Page.js",
+      "!src/Components/Items/Spesific/chart.js",
+      "!src/Components/Account/Popup/Sell-Item.js"
     ]
   }
 }
