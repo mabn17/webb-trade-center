@@ -11,6 +11,6 @@ build:
         override:
           - command: npm run test:ci
             coverage:
-              file: coverage/redovisa/clover.xml
+              file: coverage/clover.xml
               format: clover
           - command: npm run test

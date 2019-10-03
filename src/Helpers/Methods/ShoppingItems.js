@@ -12,6 +12,15 @@ Array.prototype.sum = function (prop, decimals = 2) {
 
 export const sumArr = (arr, prop) => (arr.sum(prop));
 
+export const updatedSumArr = (arr, callback) => {
+  let total = 0;
+  arr.forEach(element => {
+    total += callback(element.id);
+  });
+
+  return total;
+}
+
 export const getItems = () => {
   let items = localStorage.getItem('shoppingItems');
 

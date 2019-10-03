@@ -20,7 +20,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   getItems,
   removeItem,
-  sumArr,
+  updatedSumArr,
   addItem,
   removeItems
 } from '../../Helpers/Methods/ShoppingItems';
@@ -90,11 +90,26 @@ const ShoppingCart = (props) => {
   const [disabled, setDisabled] = React.useState(true);
   const [message, setMessage] = React.useState(null);
   const [messageTwo, setMessageTwo] = React.useState('');
+  const [updatedPrice, setUpdatedPrice] = React.useState(0);
 
   React.useEffect(() => {
     setShopItems(getItems());
   }, [props.newItem]);
 
+  const getCurrPrice = (id) => {
+    let price = 0;
+
+    for (let i = 0; i < props.itemStocks.length; i++) {
+      const element = props.itemStocks[i];
+      
+      if (element.id === id) {
+        price = element.price;
+        break;
+      }
+    }
+
+    return price;
+  }
   const handleRemoveItem = (item) => {
     removeItem(item);
     props.updateAll();
@@ -136,10 +151,11 @@ const ShoppingCart = (props) => {
       if (arrId.indexOf(item.id) === -1) {
         keyId += 1;
         const accurences = countArray(shopItems.items, item.id);
+        const currPrice = getCurrPrice(item.id);
         arrId.push(item.id);
         return (
-          <ListItem button key={`${keyId}${item.price}`} className={classes.negative} >
-            <ListItemText primary={item.name} secondary={`${item.price} kr/st.`} />
+          <ListItem button key={`${keyId}${currPrice}`} className={classes.negative} >
+            <ListItemText primary={item.name} secondary={`${currPrice} kr/st.`} />
             <IconButton onClick={() => handleAddItem(item)}><AdditionIcon /></IconButton>
               <span style={{ margin: '0 5px' }}>{accurences}</span>
             <IconButton style={ { marginTop: '-15px' } } onClick={() => handleRemoveItem(item)}><SubtractIcon /></IconButton>
@@ -150,20 +166,23 @@ const ShoppingCart = (props) => {
     });
   };
 
-  const RenderBalance = () => (
-    <>
-      {!token.id ? null : (<><b style={{ marginRight: '20px' }}>Current Balance:</b> {token.assets} kr<br /></>) }
-      <b style={{ marginRight: '94px' }}>Cost:</b>{' -' + sumArr(shopItems.items, 'price') + ' kr'}
-      { !token.id ? null : (
-        <React.Fragment>
-          <hr />
-          <div className={ (token.assets - sumArr(shopItems.items, 'price')) < 0 ? classes.warning : classes.ok }>
-            <b style={{ marginRight: '102px' }}>Left:</b> { Math.round((token.assets - sumArr(shopItems.items, 'price')) * 100) / 100 } kr.
-          </div>
-        </React.Fragment>
-      )}
-    </>
-  );
+  const RenderBalance = () => {
+    setUpdatedPrice(updatedSumArr(shopItems.items, getCurrPrice))
+    return (
+      <>
+        {!token.id ? null : (<><b style={{ marginRight: '20px' }}>Current Balance:</b> {token.assets} kr<br /></>) }
+        <b style={{ marginRight: '94px' }}>Cost:</b>{' -' + Math.round((updatedPrice) * 100) / 100 + ' kr'}
+        { !token.id ? null : (
+          <React.Fragment>
+            <hr />
+            <div className={ (token.assets - updatedPrice) < 0 ? classes.warning : classes.ok }>
+              <b style={{ marginRight: '102px' }}>Left:</b> { Math.round((token.assets - updatedPrice) * 100) / 100 } kr.
+            </div>
+          </React.Fragment>
+        )}
+      </>
+    );
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -184,7 +203,7 @@ const ShoppingCart = (props) => {
         const accurences = countArray(shopItems.items, item.id);
         holder.push(item.id);
         real.push({ stockToBuy: item.name, amountToBuy: accurences });
-        total += (item.price * accurences);
+        total += (getCurrPrice(item.id) * accurences);
       }
     });
 
@@ -202,9 +221,6 @@ const ShoppingCart = (props) => {
       return;
     }
 
-    // buyStocks()
-    // if negative abort
-    // else sell stocks and update token.assets med parrent hook?
     real.forEach(stock => {
       execBuyStocks(getToken(), stock).catch(e => console.log(e));
     });

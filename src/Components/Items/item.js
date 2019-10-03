@@ -32,9 +32,7 @@ const useStyles = makeStyles(_theme => ({
 }));
 
 const Item = (props) => {
-  // const encoded = getToken();
   const [hasBeenClicked, setHasBeenClicked] = React.useState(false);
-  // const [updatedInfo, setUpdatedInfo] = React.useState({});
   const classes = useStyles();
 
   const handleAddItem = () => {
@@ -43,27 +41,12 @@ const Item = (props) => {
     props.newItem();
   }
 
-  // const handleGetUpdatedPersonalInfo = () => {
-  //   setUpdatedInfo({});
-  //   getUpdatedInfo(encoded)
-  //     .then((res) => {
-  //       if(typeof res === typeof ' ') {
-  //         setUpdatedInfo({ id: 0, assets: 0,  });
-  //         return;
-  //       }
-
-  //       setUpdatedInfo(res);
-  //     })
-  //     .catch((e) => console.log(e));
-  // };
-
-
   return (
     <Grid item key={props.item.id} xs={12} sm={6} md={4}>
       <Card className={classes.card}>
         <CardMedia
           className={classes.cardMedia}
-          image={props.item.picture}
+          image={`${process.env.PUBLIC_URL}/img/${props.item.picture}`}
           title={props.item.name}
         />
         <CardContent className={classes.cardContent}>
@@ -72,7 +55,7 @@ const Item = (props) => {
           </Typography>
           <hr />
           <Typography>
-            {props.item.description}
+            {props.item.description.substring(0, 50)} <i> ...</i>
             <br />
             <small>{props.item.price} kr.</small>
           </Typography>

@@ -86,7 +86,7 @@ const Header = (props) => {
           className={`${classes.toolbarTitle} fix-icon-center`}
         >
         <span className="page-title">
-          <Link to="/" className={classes.titleLink}>Webb Trade Center</Link>
+          <Link to="/" id="home" className={classes.titleLink}>Webb Trade Center</Link>
         </span>
         </Typography>
           <div className="remove-me-sm">

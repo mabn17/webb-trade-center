@@ -14,7 +14,9 @@ import {
 import {
   getUpdatedInfo
 } from '../../Helpers/Requests/stocks/stocks';
-
+import {
+  socket
+} from '../../Helpers/Sockets/Sockets';
 import Clock from './item';
 
 import { getAllStocks } from '../../Helpers/Requests/stocks/stocks';
@@ -63,6 +65,20 @@ const AllItemsPage = (props) => {
   const [page, setPage] = React.useState(0);
   const [error, setError] = React.useState(0);
   const [lastIndex, setLastIndex] = React.useState(0);
+  const [socketNr, setSoketNr] = React.useState(0);
+
+  const handleUpdate = () => {
+    socket.on('stock update', (change) => {
+      console.log(socketNr);
+      setSoketNr((socketNr) => socketNr += 1);
+      getAllStocks().then(res => setStocks(res.items));
+    });
+  };
+
+  React.useEffect(() => {
+    handleUpdate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   React.useEffect(() => {
     getAllStocks().then(res => setStocks(res.items));
@@ -155,7 +171,7 @@ const AllItemsPage = (props) => {
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
-      <ShoppingCart token={token} newItem={newItem} updateAll={addNewItem} />
+      <ShoppingCart token={token} newItem={newItem} updateAll={addNewItem} itemStocks={stocks} />
       <div className={classes.container} >
         <TextField
           id="standard-full-width"
@@ -173,7 +189,7 @@ const AllItemsPage = (props) => {
           }}
         />
       </div>
-      <RenderPagination />
+      <RenderPagination count={socketNr} />
       <b className={classes.center}>{ error }</b>
       <Container className={classes.cardGridTwo} maxWidth="md">
         <Grid container spacing={4}>
