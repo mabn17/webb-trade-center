@@ -1,6 +1,6 @@
 {
   "name": "webb-trade-center",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "A frontend for JSRamverk exam project",
   "license": "MIT",
   "dependencies": {
