@@ -170,7 +170,7 @@ const ShoppingCart = (props) => {
     setUpdatedPrice(updatedSumArr(shopItems.items, getCurrPrice))
     return (
       <>
-        {!token.id ? null : (<><b style={{ marginRight: '20px' }}>Current Balance:</b> {token.assets} kr<br /></>) }
+        {!token.id ? null : (<><b style={{ marginRight: '20px' }}>Current Balance:</b> {Math.round((token.assets) * 100) / 100} kr<br /></>) }
         <b style={{ marginRight: '94px' }}>Cost:</b>{' -' + Math.round((updatedPrice) * 100) / 100 + ' kr'}
         { !token.id ? null : (
           <React.Fragment>

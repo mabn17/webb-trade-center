@@ -40,7 +40,7 @@ const Footer = () => {
           Webb Trade Center
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Buying and selling items has never been easier!
+          Trading minerals has never been easier!
         </Typography>
         <Copyright />
       </Container>

@@ -77,6 +77,11 @@ const AllItemsPage = (props) => {
 
   React.useEffect(() => {
     handleUpdate();
+
+    return () => {
+      socket.off();
+      console.log('bye');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
