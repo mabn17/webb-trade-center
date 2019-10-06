@@ -55,13 +55,13 @@ const CurrentItem = (props) => {
     });
   };
 
-  const scrollToTop = () => {
-    const progress = document.documentElement.scrollTop || document.body.scrollTop;
-    if (progress > 0) {
-      window.requestAnimationFrame(scrollToTop);
-      window.scrollTo(0, progress - progress / 20);
-    }
-  };
+  // const scrollToTop = () => {
+  //   const progress = document.documentElement.scrollTop || document.body.scrollTop;
+  //   if (progress > 10) {
+  //     window.requestAnimationFrame(scrollToTop);
+  //     window.scrollTo(0, progress - progress / 20);
+  //   }
+  // };
 
   React.useEffect(() => {
     handleUpdate();
@@ -70,7 +70,7 @@ const CurrentItem = (props) => {
 
   React.useEffect(() => {
     handleGetCurrentItem();
-    scrollToTop();
+    // scrollToTop();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match]);
 

@@ -8,27 +8,26 @@ import './Footer.css';
 
 const useStyles = makeStyles(theme => ({
   footer: {
+    flexShrink: '0',
+    padding: theme.spacing(6, 0),
     backgroundColor: theme.palette.background.paper,
     marginTop: theme.spacing(8),
-    padding: theme.spacing(6, 0),
     position: 'relative',
     bottom: '0',
     width: '100%'
   }
 }));
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://w-t-c.martinborg.me">
-        MartinBorg.me
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+const Copyright = () => (
+  <Typography variant="body2" color="textSecondary" align="center">
+    {'Copyright © '}
+    <Link color="inherit" href="https://w-t-c.martinborg.me">
+      MartinBorg.me
+    </Link>{' '}
+    {new Date().getFullYear()}
+    {'.'}
+  </Typography>
+);
 
 const Footer = () => {
   const classes = useStyles();

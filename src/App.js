@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(5),
     padding: theme.spacing(2),
   },
+  wrapper: {
+    flex: '1 0 auto'
+  },
   centerLoading: {
     display: 'flex',
     alignItems: 'center',
@@ -32,6 +35,11 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '100px',
     fontSize: '20px',
     margin: 'auto auto'
+  },
+  app: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100vh',
   }
 }));
 
@@ -42,32 +50,34 @@ const App = () => {
 
 
   return (
-    <React.Fragment>
-    <CssBaseline />
-    <React.Suspense fallback={<h1>Loading ...</h1>} className={classes.centerLoading}>
-      <Router>
-          <Container maxWidth="lg">
-            <Header updateAll={update} />
-            <main className={classes.root}>
-              <Grid container spacing={4}>
-                <Switch>
-                  <Route exact path="/" render={() => <HomePage />} />
-                  <Route exact path="/about" render={() => <AboutPage />} />
-                  <Route exact path="/stocks" render={() => <AllItemsPage />} />
-                  <Route exact path="/stocks/:name" render={(props) => <SpesificItemPage {...props} />} />
-                  <Route exact path="/account" render={(props) => <MyAccountPage {...props} updateAll={refresh} />} />
-                  <Route path="/login" render={(props) => <LoginPage {...props} updateAll={refresh} />} />
-                  <Route path="/register" render={(props) => <RegisterPage {...props} updateAll={refresh} />} />
-                  <Route exact path="/update" render={() => <UpdatePage />} />
-                  <Route exact path="**" render={() => <FoFPage />} />
-                </Switch>
-              </Grid>
-            </main>
-          </Container>
-        </Router>
-      </React.Suspense>
-      <Footer />
-    </React.Fragment>
+    <div className={classes.app}>
+      <CssBaseline />
+      <React.Suspense fallback={<h1>Loading ...</h1>} className={classes.centerLoading}>
+        <Router>
+          <div className={classes.wrapper}>
+            <Container maxWidth="lg">
+              <Header updateAll={update} />
+              <main className={classes.root}>
+                <Grid container spacing={4}>
+                  <Switch>
+                    <Route exact path="/" render={() => <HomePage />} />
+                    <Route exact path="/about" render={() => <AboutPage />} />
+                    <Route exact path="/stocks" render={() => <AllItemsPage />} />
+                    <Route exact path="/stocks/:name" render={(props) => <SpesificItemPage {...props} />} />
+                    <Route exact path="/account" render={(props) => <MyAccountPage {...props} updateAll={refresh} />} />
+                    <Route path="/login" render={(props) => <LoginPage {...props} updateAll={refresh} />} />
+                    <Route path="/register" render={(props) => <RegisterPage {...props} updateAll={refresh} />} />
+                    <Route exact path="/update" render={() => <UpdatePage />} />
+                    <Route exact path="**" render={() => <FoFPage />} />
+                  </Switch>
+                </Grid>
+              </main>
+            </Container>
+          </div>
+          </Router>
+        </React.Suspense>
+        <Footer />
+    </div>
   );
 }
 
