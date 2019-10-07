@@ -52,30 +52,30 @@ const App = () => {
   return (
     <div className={classes.app}>
       <CssBaseline />
-      <React.Suspense fallback={<h1>Loading ...</h1>} className={classes.centerLoading}>
         <Router>
           <div className={classes.wrapper}>
             <Container maxWidth="lg">
               <Header updateAll={update} />
               <main className={classes.root}>
-                <Grid container spacing={4}>
-                  <Switch>
-                    <Route exact path="/" render={() => <HomePage />} />
-                    <Route exact path="/about" render={() => <AboutPage />} />
-                    <Route exact path="/stocks" render={() => <AllItemsPage />} />
-                    <Route exact path="/stocks/:name" render={(props) => <SpesificItemPage {...props} />} />
-                    <Route exact path="/account" render={(props) => <MyAccountPage {...props} updateAll={refresh} />} />
-                    <Route path="/login" render={(props) => <LoginPage {...props} updateAll={refresh} />} />
-                    <Route path="/register" render={(props) => <RegisterPage {...props} updateAll={refresh} />} />
-                    <Route exact path="/update" render={() => <UpdatePage />} />
-                    <Route exact path="**" render={() => <FoFPage />} />
-                  </Switch>
-                </Grid>
+                <React.Suspense fallback={<h1>Loading ...</h1>} className={classes.centerLoading}>
+                  <Grid container spacing={4}>
+                    <Switch>
+                      <Route exact path="/" render={() => <HomePage />} />
+                      <Route exact path="/about" render={() => <AboutPage />} />
+                      <Route exact path="/stocks" render={() => <AllItemsPage />} />
+                      <Route exact path="/stocks/:name" render={(props) => <SpesificItemPage {...props} />} />
+                      <Route exact path="/account" render={(props) => <MyAccountPage {...props} updateAll={refresh} />} />
+                      <Route path="/login" render={(props) => <LoginPage {...props} updateAll={refresh} />} />
+                      <Route path="/register" render={(props) => <RegisterPage {...props} updateAll={refresh} />} />
+                      <Route exact path="/update" render={() => <UpdatePage />} />
+                      <Route exact path="**" render={() => <FoFPage />} />
+                    </Switch>
+                  </Grid>
+                </React.Suspense>
               </main>
             </Container>
           </div>
           </Router>
-        </React.Suspense>
         <Footer />
     </div>
   );

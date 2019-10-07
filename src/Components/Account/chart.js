@@ -65,7 +65,6 @@ const Chart = ({hasUpdated = false, stock, mhm }) => {
           }
 
           handleData(holder);
-          // console.log(stock.item_name, holder);
           setIsUpdating(false);
           setPrice((val) => val += 1);
         }).catch((e) => {

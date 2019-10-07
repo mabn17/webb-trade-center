@@ -40,7 +40,7 @@ const Deposits = ({ token, stocks, update }) => {
   return (
     <>
       <Typography component="h2" variant="h6" gutterBottom>
-        Available Balance
+        Locked Balance
       </Typography>
       <Typography component="p" variant="h4">
         { token.assets ? `${round(token.assets)} kr.`  : '...' }

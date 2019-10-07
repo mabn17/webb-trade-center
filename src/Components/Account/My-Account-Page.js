@@ -172,7 +172,6 @@ const MyAccount = (props) => {
 
     return () => {
       socket.off();
-      console.log('bye');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stocks]);
@@ -182,7 +181,7 @@ const MyAccount = (props) => {
       <Typography component="h1" variant="h4" className="caps-dad" gutterBottom>
         Hello there, <span className="caps">
         { token.first_name ? token.first_name : '' }
-      </span>!
+      </span>
       </Typography>
       <Divider />
       <Typography component="h2" variant="h5" gutterBottom className={classes.marginTop}>

@@ -90,6 +90,7 @@ const ShoppingCart = (props) => {
   const [disabled, setDisabled] = React.useState(true);
   const [message, setMessage] = React.useState(null);
   const [messageTwo, setMessageTwo] = React.useState('');
+  const [boughtMsg, setBoughtMsg] = React.useState('');
   const [updatedPrice, setUpdatedPrice] = React.useState(0);
 
   React.useEffect(() => {
@@ -156,9 +157,9 @@ const ShoppingCart = (props) => {
         return (
           <ListItem button key={`${keyId}${currPrice}`} className={classes.negative} >
             <ListItemText primary={item.name} secondary={`${currPrice} kr/st.`} />
-            <IconButton onClick={() => handleAddItem(item)}><AdditionIcon /></IconButton>
-              <span style={{ margin: '0 5px' }}>{accurences}</span>
             <IconButton style={ { marginTop: '-15px' } } onClick={() => handleRemoveItem(item)}><SubtractIcon /></IconButton>
+              <span style={{ margin: '0 5px' }}>{accurences}</span>
+              <IconButton onClick={() => handleAddItem(item)}><AdditionIcon /></IconButton>
           </ListItem>
         );
       }
@@ -185,6 +186,7 @@ const ShoppingCart = (props) => {
   };
 
   const handleClickOpen = () => {
+    setBoughtMsg('');
     setOpen(true);
   }
 
@@ -225,6 +227,7 @@ const ShoppingCart = (props) => {
       execBuyStocks(getToken(), stock).catch(e => console.log(e));
     });
 
+    setBoughtMsg('All stocks has sucsessfully been added to your account.');
     handleRemoveAll();
     return;
   }
@@ -253,6 +256,9 @@ const ShoppingCart = (props) => {
         <span className={classes.warning} >{ messageTwo }</span>
       </ListItem>
       </List>
+      <Typography component={'span'} variant={'body2'} className={`${classes.right} ${classes.ok}`} >
+        { boughtMsg }
+      </Typography>
       <Typography component={'span'} variant={'body2'} className={classes.right} >
         { shopItems.items.length === 0 ? <b>No items in cart</b> : <RenderBalance /> }
       </Typography>
