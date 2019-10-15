@@ -1,4 +1,6 @@
+/** global localStorage */
 import axios from 'axios';
+import { removeToken } from '../../Methods/TokenHandeler';
 
 const DETAULT_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
 const allStocks = `${DETAULT_URL}/stocks`;
@@ -11,7 +13,20 @@ const buyStocks = `${DETAULT_URL}/user/stocks/buy`;
 const addAssets = `${DETAULT_URL}/user/update/assets`;
 
 export const handleError = (e) => {
-  if (e.response) return e.response.data.errors.detail;
+  if (e.response) {
+    const error = e.response.data.errors.detail;
+    const jwtErrors = ['signature', 'jwt', 'token'];
+
+    for (let i = 0; i < jwtErrors.length; i++) {
+      if (error.includes(jwtErrors[i])) {
+        removeToken();
+
+        return window.location.assign('/login?err=invalid_token')
+      }
+    }
+
+    return error;
+  }
 
   return 'Could not reach the server';
 };
