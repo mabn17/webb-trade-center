@@ -10,9 +10,10 @@ A frontend for [JsRamverk](https://jsramverk.me) project at BTH.
 [Server](https://github.com/mabn17/server-webb-trade-center)
 
 ## Installation
-1. Clone the repo `git clone git@github.com:mabn17/ramverk2-client.git`.
+1. Clone the repo `git clone git@github.com:mabn17/webb-trade-center.git`.
 2. Install the dependencies `cd webb-trade-center && npm install`
-3. Start the app `npm start`
+3. Change the congif values inside `.env`
+3. Start the app `npm start` or build it for production `npm run build`
 
 ## Testing
 1. To see reports from the unittests `npm run test:ci`
@@ -20,24 +21,30 @@ A frontend for [JsRamverk](https://jsramverk.me) project at BTH.
 
 **OBS** selenium requires your to have [Geckodriver](https://github.com/mozilla/geckodriver/releases) installed in your path.
 
-### Selenium use-cases
-..
+### Selenium use-cases (Project requirement 5)
+#### The About-Page
+1. Navigates to the account-page from the navlink and compares the urls.
+2. Checks if the markdown content is rendering properly.
 
+#### The Index-Page
+1. Navigates to the account-page from the navlink and compares the urls.
+2. Compares the document title to the .env files content.
 
-## Routes
-***/*** - Home.  
-***/about*** - About the company & project.  
-***/login*** - The login page.  
-***/register*** - The registration page.    
-***/account*** - The users index page (user account).    
-***/\*\**** - Catching unknown routes with an error message.  
+#### The My-Account-Page
+1. Opens the url /account and expects a redirect to /login if the user does not have a token.
+
+#### The Login-Page
+1. Navigates to /login from the signup button, then compares the urls
+2. (+3) Tests two different email combinations to see if the correct error is displayed.
+4. Tests to login with the worng password lenght to see if the correct error is displayed.
+5. As the express server is not running, tests to login with correct validations to see if a "could not reach the server" error is displayed
+
+#### The Register-Page
+1. Navigates to register though the signup button then compares the urls.
+2. Tries to register with an incorect password field to see if the correct error is displayed.
+3. Tries to register with an empyt firstname field to see if the correct error is displayed.
+3. (+4) Tries to register with an incorect email field to see if the correct error is displayed.
+5. As the express server is not running, tests to login with correct validations to see if a "could not reach the server" error is displayed
 
 ###### Thanks
 This website was made with recharts, markdown-to-jsx, material-ui and material-icons
-
-#### TODO: 
-1. Make it possible to add balance to the user (maybe add some kind of account manageing / better personal page)
-2. Let the user sell items  
-3. Let the user buy items  
-4. See your items and bought items  
-5. Realtime on add/edit items
