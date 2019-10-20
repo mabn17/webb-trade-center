@@ -1,5 +1,6 @@
 # React Website
-A frontend for [JsRamverk](https://jsramverk.me) project at BTH.
+A frontend for [JsRamverk](https://jsramverk.me) project at BTH.  
+**Reasons** behind the techniques chosen for both the frontend and the backend can be found [here](https://gist.github.com/mabn17/6d6016b1e5bce632f8cbdf7a29013fad).  
 
 # Badges
 [![Build Status](https://travis-ci.org/mabn17/webb-trade-center.svg?branch=master)](https://travis-ci.org/mabn17/webb-trade-center)
@@ -16,8 +17,8 @@ A frontend for [JsRamverk](https://jsramverk.me) project at BTH.
 3. Start the app `npm start` or build it for production `npm run build`
 
 ## Testing
-1. To see reports from the unittests `npm run test:ci`
-2. Tests with Selenium `npm test`
+1. To run the unittest and see the coverage report `npm run test:ci`
+2. Tests with Selenium `npm test` (Requires `npm start` to be running on port 3000)
 
 **OBS** selenium requires your to have [Geckodriver](https://github.com/mozilla/geckodriver/releases) installed in your path.
 
