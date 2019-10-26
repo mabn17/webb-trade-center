@@ -75,7 +75,6 @@ const CurrentItem = (props) => {
   }, [props.match]);
 
   const handleGetCurrentItem = () => {
-    console.log('hey');
     setErr('');
     setProduct({  });
 
@@ -135,7 +134,7 @@ const CurrentItem = (props) => {
         {/* End main content */}
         {/* Sidebar */}
         <Grid item xs={12} md={4}>
-          <Link to="/stocks" className={classes.link}>
+          <Link to="/shop" className={classes.link}>
             <Icon className={classes.black} />
             Back to the shop
           </Link>
