@@ -18,6 +18,7 @@ const RegisterPage = lazy(() => import('./Components/Register/Register-Page'));
 const MyAccountPage = lazy(() => import('./Components/Account/My-Account-Page'));
 const LoginPage = lazy(() => import('./Components/Login/Login-Page'));
 const UpdatePage = lazy(() => import('./Components/Update/Update-Page'));
+const Shop = lazy(() => import('./Components/Shop/Shop'));
 
 
 const useStyles = makeStyles(theme => ({
@@ -63,6 +64,7 @@ const App = () => {
                       <Route exact path="/" render={() => <HomePage />} />
                       <Route exact path="/about" render={() => <AboutPage />} />
                       <Route exact path="/stocks" render={() => <AllItemsPage />} />
+                      <Route exact path="/shop" render={(props) => <Shop {...props} />}/>
                       <Route exact path="/stocks/:name" render={(props) => <SpesificItemPage {...props} />} />
                       <Route exact path="/account" render={(props) => <MyAccountPage {...props} updateAll={refresh} />} />
                       <Route path="/login" render={(props) => <LoginPage {...props} updateAll={refresh} />} />

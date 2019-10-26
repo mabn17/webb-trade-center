@@ -62,7 +62,8 @@
       "!src/Components/Account/chart.js",
       "!src/Components/Register/Register-Page.js",
       "!src/Components/Items/Spesific/chart.js",
-      "!src/Components/Account/Popup/Sell-Item.js"
+      "!src/Components/Account/Popup/Sell-Item.js",
+      "!src/Components/Shop/*"
     ]
   }
 }

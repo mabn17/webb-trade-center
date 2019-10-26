@@ -32,6 +32,10 @@ button {
   margin-top: 25px;
 }
 
+.csr:hover {
+  cursor: pointer;
+}
+
 .pagination span {
   cursor: pointer;
   color: black;

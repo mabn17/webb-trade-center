@@ -16,7 +16,7 @@ const NavConfig = {
     },
     {
       name: 'Shop',
-      url: '/stocks'
+      url: '/shop'
     }
   ],
   buttons: {
