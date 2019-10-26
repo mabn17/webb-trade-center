@@ -10,9 +10,9 @@ import SellItem from './buyItem';
 import { round } from '../../Helpers/Methods/FilterValues.js';
 
 
-const ShopItems = ({ history, items = [], updatePersonal, token }) => {
+const ShopItems = ({ history, items = [], updatePersonal, token, updateMe }) => {
   const [open, setOpen] = React.useState(false);
-  const [currItem, setCurrItem] = React.useState({ name: '' });
+  const [currItem, setCurrItem] = React.useState(0);
 
   const handleClickOpen = () => { setOpen(true); };
   const handleClose = () => { setOpen(false); };
@@ -36,7 +36,9 @@ const ShopItems = ({ history, items = [], updatePersonal, token }) => {
                 onClick={() => history.push(`/stocks/${row.name}`)}
               >&#128065;</TableCell>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{row.price}</TableCell>
+              <TableCell>
+              {row.price}
+              </TableCell>
               <TableCell align="right">
                 <Button
                   type="submit"
@@ -44,7 +46,7 @@ const ShopItems = ({ history, items = [], updatePersonal, token }) => {
                   variant="contained"
                   color="primary"
                   style={ { padding: '1px' } }
-                  onClick={() => { setCurrItem(row); handleClickOpen(); }}
+                  onClick={() => { setCurrItem(row.id - 1); handleClickOpen(); }}
                 >
                   Buy
                 </Button>
@@ -52,6 +54,7 @@ const ShopItems = ({ history, items = [], updatePersonal, token }) => {
                   open={open}
                   handleClose={handleClose}
                   item={currItem}
+                  items={items}
                   token={token}
                   updatePersonal={updatePersonal}
                 />

@@ -21,17 +21,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const FormDialog = ({ open, handleClose, item, updatePersonal, token }) => {
+const FormDialog = ({ open, handleClose, item = 0, items = [{}], updatePersonal, token }) => {
   const classes = useStyles();
-  const [val, setVal] = React.useState(item.amount);
+  const [val, setVal] = React.useState(0);
   const [isUpdating, setIsUpdating] = React.useState(false);
   const [errMsg, setErrMsg] = React.useState('');
   const handleDeposit = () => {
     setErrMsg('');
-    // if ((item.price * val) > token.assets) {
-    //   setErrMsg('Wops, Can not buy more stocks then have balance.');
-    //   return;
-    // }
+
     if (val <= 0) {
       setErrMsg('Wops, You cant buy a negative number');
       return;
@@ -39,7 +36,7 @@ const FormDialog = ({ open, handleClose, item, updatePersonal, token }) => {
 
     if (!isUpdating) {
       setIsUpdating(true);
-      execBuyStocks(getToken(), {stockToBuy: item.name, amountToBuy: val})
+      execBuyStocks(getToken(), {stockToBuy: items[item].name, amountToBuy: val})
         .then((res) => {
           if (typeof res === typeof '  ') {
             setErrMsg(`Wops, ${res}`);
@@ -56,12 +53,12 @@ const FormDialog = ({ open, handleClose, item, updatePersonal, token }) => {
   };
 
   React.useEffect(() => {
-    setVal(item.amount);
+    setVal(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
-    setVal(item.amount);
+    setVal(0);
     setErrMsg('');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item]);
@@ -71,13 +68,13 @@ const FormDialog = ({ open, handleClose, item, updatePersonal, token }) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">{ item.name }</DialogTitle>
+        <DialogTitle id="form-dialog-title">{ items[item].name }</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
             id="assets"
-            label={`${item.price}/each`}
+            label={`${items[item].price}/each`}
             type="number"
             onChange={handleChange}
             defaultValue={0}
@@ -86,13 +83,13 @@ const FormDialog = ({ open, handleClose, item, updatePersonal, token }) => {
           <span>Balance: {round(token.assets)}</span><br />
           <span
             className={
-              item.price * val > token.assets
+              items[item].price * val > token.assets
               || val <= 0
                 ? classes.warning
                 : classes.succsess
             }
           >
-            Cost: { isNaN(item.price * val) ? 0 : round(item.price * val) }
+            Cost: { isNaN(items[item].price * val) ? 0 : round(items[item].price * val) }
           </span>
           <br />
           { errMsg && errMsg.startsWith('Wops')

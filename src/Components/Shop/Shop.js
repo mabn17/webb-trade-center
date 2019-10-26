@@ -75,9 +75,9 @@ const AllItemsPage = (props) => {
   React.useEffect(() => {
     handleUpdate();
 
-    return () => {
-      socket.off();
-    }
+    // return () => {
+    //   socket.off();
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -118,6 +118,7 @@ const AllItemsPage = (props) => {
             <ShopTable items={stocks} token={token}
               updatePersonal={handleGetUpdatedPersonalInfo}
               history={props.history}
+              updateMe={socketNr}
             />
           </Paper>
         </Grid>
