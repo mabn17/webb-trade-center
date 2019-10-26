@@ -47,7 +47,7 @@ const FormDialog = ({ open, handleClose, item = 0, items = [{}], updatePersonal,
           setIsUpdating(false);
           updatePersonal();
           // handleClose();
-          setErrMsg(`${item.name} succsessfully bought!`);
+          setErrMsg(`${items[item].name} succsessfully bought!`);
         }).catch((e) => { console.log(e); setIsUpdating(false); });
     }
   };
