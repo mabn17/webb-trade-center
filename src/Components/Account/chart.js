@@ -127,7 +127,11 @@ const Chart = ({hasUpdated = false, stock = {}, mhm }) => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                   dataKey="time"
-                  tickFormatter={timestamp => timestamp}
+                  tickFormatter={timestamp =>
+                    timestamp !== 'now' ?
+                      new Date(timestamp).toLocaleTimeString('sv-SE')
+                      : 'now'
+                  }
               />
               <YAxis
                   type="number"
@@ -136,7 +140,11 @@ const Chart = ({hasUpdated = false, stock = {}, mhm }) => {
               />
               <Tooltip
                   formatter={value => [value]}
-                  labelFormatter={timestamp => `time: ${timestamp}`}
+                  labelFormatter={timestamp =>
+                    timestamp !== 'now' ?
+                      new Date(timestamp).toLocaleTimeString('sv-SE')
+                      : 'now'
+                  }
               />
               <Area
                   type="monotone"
@@ -145,6 +153,7 @@ const Chart = ({hasUpdated = false, stock = {}, mhm }) => {
                     ? '#82ca9d'
                     : '#d61c3b'
                   }
+                  strokeWidth={1}
                   fillOpacity={1}
                   fill={`url(#${stock.item_name})`}
               />

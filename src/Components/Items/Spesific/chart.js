@@ -110,6 +110,7 @@ const Chart = ({ history = [] }) => {
                     ? '#82ca9d'
                     : '#d61c3b'
                   }
+                  strokeWidth={1}
                   fillOpacity={1}
                   fill="url(#colorPv)"
               />
