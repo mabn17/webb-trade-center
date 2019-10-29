@@ -51,7 +51,7 @@ const CurrentItem = (props) => {
 
   const handleUpdate = () => {
     socket.on('stock update', (change) => {
-      handleGetCurrentItem();
+      handleGetCurrentItem(true);
     });
   };
 
@@ -74,9 +74,9 @@ const CurrentItem = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match]);
 
-  const handleGetCurrentItem = () => {
+  const handleGetCurrentItem = (sock = false) => {
     setErr('');
-    setProduct({  });
+    // setProduct({  });
 
     const name = props.match.params.name || '';
     getAllStocks({}).then((res) => {
@@ -84,20 +84,23 @@ const CurrentItem = (props) => {
         setErr(res);
         return;
       }
+
       setItems(res.items);
 
-      let element = {};
+      if (!sock) {
+        let element = {};
 
-      for (let index = 0; index < res.items.length; index++) {
-        const element = res.items[index];
-        // eslint-disable-next-line no-cond-assign
-        if (element.name === name) {
-          setProduct(element);
-          break;
+        for (let index = 0; index < res.items.length; index++) {
+          const element = res.items[index];
+          // eslint-disable-next-line no-cond-assign
+          if (element.name === name) {
+            setProduct(element);
+            break;
+          }
         }
+  
+        if (element === {}) return;
       }
-
-      if (element === {}) return;
 
       getStockHistory().then((resp) => {
         if (typeof resp === typeof '   ') {

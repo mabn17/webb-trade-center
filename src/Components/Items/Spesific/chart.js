@@ -92,7 +92,11 @@ const Chart = ({ history = [] }) => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                   dataKey="time"
-                  tickFormatter={timestamp => timestamp}
+                  tickFormatter={timestamp =>
+                    timestamp !== 'now' ?
+                      new Date(timestamp).toLocaleTimeString('sv-SE')
+                      : 'now'
+                  }
               />
               <YAxis
                   type="number"
@@ -101,7 +105,11 @@ const Chart = ({ history = [] }) => {
               />
               <Tooltip
                   formatter={value => [value]}
-                  labelFormatter={timestamp => `time: ${timestamp}`}
+                  labelFormatter={timestamp =>
+                    timestamp !== 'now' ?
+                      new Date(timestamp).toLocaleTimeString('sv-SE')
+                      : 'now'
+                  }
               />
               <Area
                   type="monotone"

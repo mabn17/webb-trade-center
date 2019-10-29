@@ -166,7 +166,6 @@ const MyAccount = (props) => {
   const handleUpdate = () => {
     socket.on('stock update', (change) => {
       handleStocks();
-      handleGetUpdatedPersonalInfo();
       setSocketIsTriggerd((st) => st += 1);
     });
   }
