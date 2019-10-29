@@ -7,17 +7,17 @@ const NavConfig = {
     {
       name: 'About us',
       url: '/about'
-    }
+    },
+    {
+      name: 'Shop',
+      url: '/shop'
+    },
   ],
   loggedIn: [
     {
       name: 'My Account',
       url: '/account'
     },
-    {
-      name: 'Shop',
-      url: '/shop'
-    }
   ],
   buttons: {
     Sign: {
