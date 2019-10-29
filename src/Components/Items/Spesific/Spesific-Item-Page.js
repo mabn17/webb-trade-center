@@ -105,7 +105,8 @@ const CurrentItem = (props) => {
           return;
         }
   
-        const holder = resp.filter((stock) => stock.item_name === name);
+        const ph = resp.filter((stock) => stock.item_name === name);
+        const holder = ph.reverse();
 
         if (holder[0]) {
           holder.push({ item_name: holder[0].item_name, old_price: holder[0].price, when_time: 'now' });

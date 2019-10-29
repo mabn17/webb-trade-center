@@ -109,6 +109,9 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
+  fixedChartHeight: {
+    height: 375,
+  }
 }));
 
 const MyAccount = (props) => {
@@ -120,6 +123,7 @@ const MyAccount = (props) => {
   const [personalError, setPersonalError] = React.useState(null);
   const [socketIsTriggerd, setSocketIsTriggerd] = React.useState(0);
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const fixedChartHeight = clsx(classes.paper, classes.fixedChartHeight);
   const [nowItem, setNowItem] = React.useState([]);
 
   const handleStocks = () => {
@@ -212,7 +216,7 @@ const MyAccount = (props) => {
             {
               stocks.stocks ? stocks.stocks.map((stock) => (
                 <Grid item xs={12} md={12} lg={12} key={`paper-${stock.id}`}>
-                  <Paper className={fixedHeightPaper}>
+                  <Paper className={fixedChartHeight}>
                     <Chart mhm={nowItem} hasUpdated={socketIsTriggerd} stock={stock} />
                   </Paper>
                 </Grid>

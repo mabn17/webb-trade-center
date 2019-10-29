@@ -1,12 +1,16 @@
 import React from 'react';
+// import {
+//   LineChart,
+//   Line,
+//   XAxis,
+//   YAxis,
+//   Label,
+//   Tooltip,
+//   ResponsiveContainer } from 'recharts';
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Label,
-  Tooltip,
-  ResponsiveContainer } from 'recharts';
+  ResponsiveContainer, AreaChart, Area, XAxis, YAxis,
+  Tooltip, CartesianGrid
+} from 'recharts';
 import Typography from '@material-ui/core/Typography';
 import {
   getStockHistory,
@@ -23,7 +27,7 @@ function calcDiff(first, second) {
   return (telj/namn) * times;
 }
 
-const Chart = ({hasUpdated = false, stock, mhm }) => {
+const Chart = ({hasUpdated = false, stock = {}, mhm }) => {
   const [data, setData] = React.useState([]);
   const [isUpdating, setIsUpdating] = React.useState(false);
   // eslint-disable-next-line no-unused-vars
@@ -35,6 +39,8 @@ const Chart = ({hasUpdated = false, stock, mhm }) => {
       amount: stock_item.old_price
     }
   };
+
+  const hasRisen = data[1] && (data[data.length - 1].amount - data[data.length - 2].amount) >= 0;
 
   const handleData = (holder) => {
     setData(holder);
@@ -85,10 +91,9 @@ const Chart = ({hasUpdated = false, stock, mhm }) => {
     <>
       {
         data[1]
-          ? (<Typography component="p" variant="body2" gutterBottom>
+          ? (<Typography component="p" variant="body2" style={{marginBottom: '30px'}} gutterBottom>
             <b>{ data[data.length - 1].amount }</b><span><i>SEK</i>
-              <span style={
-                (data[data.length - 1].amount - data[data.length - 2].amount) >= 0
+              <span style={hasRisen
                 ? { color: 'green' }
                 : { color: 'red' }
               }>
@@ -101,17 +106,59 @@ const Chart = ({hasUpdated = false, stock, mhm }) => {
       }
     </>
   );
+
   return (
     <>
       <Typography component="h2" variant="h6" gutterBottom>
       <b>{ stock ? stock.item_name : '-' }</b> Prices
-      { data[1] && (data[data.length - 1].amount - data[data.length - 2].amount) >= 0
+      { data[1] && hasRisen
         ? <ArrowDownwardOutlined style={{ paddingBottom: '10px', color: 'green', transform: 'rotate(180deg)' }} />
         : <ArrowDownwardOutlined style={{ paddingTop: '10px', color: 'red' }} />
       }
       </Typography>
         <RenderDetails />
-      <ResponsiveContainer>
+        <ResponsiveContainer height={250}>
+          <AreaChart data={data}
+              margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+              <defs>
+                <linearGradient id={stock.item_name} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor={hasRisen
+                    ? '#82ca9d'
+                    : '#d61c3b'
+                  } stopOpacity={0.5} />
+                  <stop offset="95%" stopColor={hasRisen
+                    ? '#82ca9d'
+                    : '#d61c3b'
+                  } stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                  dataKey="time"
+                  tickFormatter={timestamp => timestamp}
+              />
+              <YAxis
+                  type="number"
+                  domain={['dataMin - 1', 'dataMax + 1']}
+                  tickFormatter={value => value.toFixed(2)}
+              />
+              <Tooltip
+                  formatter={value => [value]}
+                  labelFormatter={timestamp => `time: ${timestamp}`}
+              />
+              <Area
+                  type="monotone"
+                  dataKey="amount"
+                  stroke={hasRisen
+                    ? '#82ca9d'
+                    : '#d61c3b'
+                  }
+                  fillOpacity={1}
+                  fill={`url(#${stock.item_name})`}
+              />
+          </AreaChart>
+        </ResponsiveContainer>
+      {/* <ResponsiveContainer>
         <LineChart
           data={data}
           margin={{
@@ -130,7 +177,7 @@ const Chart = ({hasUpdated = false, stock, mhm }) => {
           </YAxis>
           <Line type="monotone" dataKey="amount" stroke="#556CD6" dot={true} />
         </LineChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> */}
     </>
   );
 }

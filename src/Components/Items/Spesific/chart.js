@@ -1,13 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Label,
-  Tooltip,
-  ResponsiveContainer } from 'recharts';
+  ResponsiveContainer, AreaChart, Area, XAxis, YAxis,
+  Tooltip, CartesianGrid
+} from 'recharts';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -31,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 375,
   },
 }));
 
@@ -39,16 +35,21 @@ const Chart = ({ history = [] }) => {
   const data = history.map((item) => {
     return { price: item.old_price, time: item.when_time };
   });
+
+  // if (history[0]) {
+  //   data.push({price: history[0].price, time: 'now'});
+  // }
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const hasRisen = (data[data.length - 1].price - data[data.length - 2].price) >= 0;
   const RenderDetails = () => (
     <>
       {
         data[1]
-          ? (<Typography component="p" variant="body2" gutterBottom>
+          ? (<Typography component="p" variant="body2" style={{marginBottom: '30px'}} gutterBottom>
             <b>{ data[data.length - 1].price }</b><span><i>SEK</i>
               <span style={
-                (data[data.length - 1].price - data[data.length - 2].price) >= 0
+                hasRisen
                 ? { color: 'green' }
                 : { color: 'red' }
               }>
@@ -67,31 +68,52 @@ const Chart = ({ history = [] }) => {
       <Paper className={fixedHeightPaper}>
         <Typography component="h2" variant="h6" gutterBottom>
         <b>Price History</b>
-        { data[1] && (data[data.length - 1].price - data[data.length - 2].price) >= 0
+        { data[1] && hasRisen
           ? <ArrowDownwardOutlined style={{ paddingBottom: '10px', color: 'green', transform: 'rotate(180deg)' }} />
           : <ArrowDownwardOutlined style={{ paddingTop: '10px', color: 'red' }} />
         }
         </Typography>
           <RenderDetails />
-        <ResponsiveContainer>
-          <LineChart
-            data={data}
-            margin={{
-              top: 16,
-              right: 16,
-              bottom: 0,
-              left: 24,
-            }}
-          >
-            <Tooltip />
-            <XAxis dataKey="time" />
-            <YAxis>
-              <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>
-                Sales (kr)
-              </Label>
-            </YAxis>
-            <Line type="monotone" dataKey="price" stroke="#556CD6" dot={true} />
-          </LineChart>
+        <ResponsiveContainer height={250}>
+          <AreaChart data={data}
+              margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+              <defs>
+                <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor={hasRisen
+                    ? '#82ca9d'
+                    : '#d61c3b'
+                  } stopOpacity={0.5} />
+                  <stop offset="95%" stopColor={hasRisen
+                    ? '#82ca9d'
+                    : '#d61c3b'
+                  } stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                  dataKey="time"
+                  tickFormatter={timestamp => timestamp}
+              />
+              <YAxis
+                  type="number"
+                  domain={['dataMin - 1', 'dataMax + 1']}
+                  tickFormatter={value => value.toFixed(2)}
+              />
+              <Tooltip
+                  formatter={value => [value]}
+                  labelFormatter={timestamp => `time: ${timestamp}`}
+              />
+              <Area
+                  type="monotone"
+                  dataKey="price"
+                  stroke={hasRisen
+                    ? '#82ca9d'
+                    : '#d61c3b'
+                  }
+                  fillOpacity={1}
+                  fill="url(#colorPv)"
+              />
+          </AreaChart>
         </ResponsiveContainer>
       </Paper>
     </Grid>
