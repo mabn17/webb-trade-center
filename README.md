@@ -1,6 +1,8 @@
 # React Website
 A frontend for [JsRamverk](https://jsramverk.me) project at BTH.  
-All of the **reasons** *(Krav 1-5)* behind the techniques chosen for both the frontend and the backend can be found [here](https://gist.github.com/mabn17/6d6016b1e5bce632f8cbdf7a29013fad).  
+
+### Krav 1-5
+All of the **reasons** behind the techniques chosen for both the frontend and the backend can be found [here](https://gist.github.com/mabn17/6d6016b1e5bce632f8cbdf7a29013fad).  
 
 # Badges
 [![Build Status](https://travis-ci.org/mabn17/webb-trade-center.svg?branch=master)](https://travis-ci.org/mabn17/webb-trade-center)
@@ -57,6 +59,8 @@ All of the **reasons** *(Krav 1-5)* behind the techniques chosen for both the fr
 \*/account\* - Behövs vara inloggad, invalid/utgånga tokens tar en tillbaka till login. Här visas grafer, tabell med mer information samt en summering på sin låsta balans och hur mycket aktierna är värda. Detta är endast på de aktierna man äger (uppdateras på socket).  
 \*/stocks/:namn\* - Visar hela grafen, beskrivning på varan och en lista för att snabbt kunna titta på andra aktier (uppdateras på socket).  
 \*/update\* - Uppdaterar alla priser.  
+
+\*/shop\* - Listar alla metaller som en tabell där man kan köpa och investera i dem.  
 \*/stocks\* - Listar alla metaller man kan investera i, de är uppdelade 3-4 items per "sida" och man kan söka på alla namnen, när man trycker på "Add to cart" så kommer ett nummer bredvid varukorgen övanför sökfältet att ökas. Klickar man på korgen så öppnas det en modal där man kan editera varukorgen och köpa dem (uppdateras på socket).
 
 
