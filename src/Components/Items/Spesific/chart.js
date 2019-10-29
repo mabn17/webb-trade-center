@@ -65,7 +65,7 @@ const Chart = ({ history = [] }) => {
 
   return (
     <Grid item xs={12} md={12} lg={12}>
-      <Paper className={fixedHeightPaper}>
+      <Paper className={fixedHeightPaper} style={{ overflow: 'hidden' }}>
         <Typography component="h2" variant="h6" gutterBottom>
         <b>Price History</b>
         { data[1] && hasRisen

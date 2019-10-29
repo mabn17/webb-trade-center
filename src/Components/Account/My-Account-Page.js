@@ -216,7 +216,7 @@ const MyAccount = (props) => {
             {
               stocks.stocks ? stocks.stocks.map((stock) => (
                 <Grid item xs={12} md={12} lg={12} key={`paper-${stock.id}`}>
-                  <Paper className={fixedChartHeight}>
+                  <Paper className={fixedChartHeight} style={{ overflow: 'hidden' }}>
                     <Chart mhm={nowItem} hasUpdated={socketIsTriggerd} stock={stock} />
                   </Paper>
                 </Grid>

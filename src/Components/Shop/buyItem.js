@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -96,12 +97,16 @@ const FormDialog = ({ open, handleClose, item = 0, items = [{}], updatePersonal,
             ? (<span className={classes.warning} >{ errMsg }</span>)
             : (<span className={classes.succsess} >{ errMsg }</span>)
           }
+          <br />
+          { token.id === 0 ? <Link className={classes.warning} to="/login">
+            Login to continue
+          </Link> : null}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Close
           </Button>
-          <Button onClick={handleDeposit} color="primary">
+          <Button onClick={handleDeposit} disabled={token.id === 0} color="primary">
             Buy
           </Button>
         </DialogActions>
